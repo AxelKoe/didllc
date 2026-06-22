@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Data Informed Decisions LLC — Legal: Terms of Service & Privacy Policy." />
-<title>Legal — Data Informed Decisions LLC</title>
+<meta name="description" content="Data Informed Decisions LLC — data-driven analytics, tracking, automation, and reporting." />
+<title>Data Informed Decisions LLC</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,78 +17,386 @@
     --ink-80: rgba(22,34,27,.82);
     --ink-60: rgba(22,34,27,.62);
     --ink-40: rgba(22,34,27,.42);
+
     --glass: rgba(255,255,255,.50);
     --glass-strong: rgba(255,255,255,.68);
     --glass-border: rgba(255,255,255,.65);
     --hairline: rgba(22,34,27,.09);
+
     --signal:#176B44;
     --signal-hover:#0F4E32;
-    --r-lg: 28px; --r-sm: 12px; --max: 1140px;
+    --signal-soft: rgba(23,107,68,.14);
+    --spark:#E2572C;
+
+    --r-lg: 28px;
+    --r-md: 18px;
+    --r-sm: 12px;
+    --max: 1140px;
+
     --blur: blur(24px) saturate(170%);
     --shadow-glass: 0 20px 50px rgba(22,34,27,.10), 0 1px 0 rgba(255,255,255,.7) inset;
     --shadow-sm: 0 6px 16px rgba(22,34,27,.08);
     --focus: 0 0 0 3px rgba(23,107,68,.30);
+
     --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
     --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
-  *{ box-sizing:border-box; }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
   html, body{ margin:0; }
   body{
-    background: var(--bg); color: var(--ink); font-family: var(--font-body); line-height:1.5;
-    -webkit-font-smoothing: antialiased; overflow-x:hidden;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  a{ color:inherit; text-decoration:none; }
-  a:focus-visible{ outline:none; box-shadow: var(--focus); border-radius: 8px; }
   img{ max-width:100%; display:block; }
-  .wrap{ width: min(var(--max), 92vw); margin: 0 auto; }
+  a{ color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline: none;
+    box-shadow: var(--focus);
+    border-radius: 8px;
+  }
+  ::selection{ background: var(--signal-soft); color: var(--signal-hover); }
 
   .bg-field{
-    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
     background:
       radial-gradient(900px 700px at 8% 6%, rgba(80,200,150,.40), transparent 60%),
       radial-gradient(760px 620px at 95% 14%, rgba(226,87,44,.20), transparent 55%),
-      radial-gradient(900px 740px at 50% 105%, rgba(70,150,210,.16), transparent 60%);
+      radial-gradient(900px 740px at 50% 105%, rgba(70,150,210,.16), transparent 60%),
+      radial-gradient(600px 500px at 30% 80%, rgba(80,200,150,.18), transparent 60%);
   }
+
+  .wrap{ width: min(var(--max), 92vw); margin: 0 auto; }
+
+  h1, h2, h3{ font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; margin: 0; color: var(--ink); }
 
   .glass{
-    background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--r-lg);
-    backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); box-shadow: var(--shadow-glass);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--r-lg);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    box-shadow: var(--shadow-glass);
+    position: relative;
   }
 
-  header{ position: sticky; top:0; z-index:20; padding: 12px 0 0; }
-  .nav{
-    background: var(--glass-strong); border: 1px solid var(--glass-border);
-    backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-    border-radius: 999px; box-shadow: var(--shadow-sm);
-    display:flex; align-items:center; justify-content:space-between; padding:8px 8px 8px 16px; gap:14px;
+  /* ---------- header ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    padding: 12px 0 0;
   }
-  .brand{ display:flex; align-items:center; gap:10px; }
-  .brand img{ width:34px; height:34px; border-radius:9px; }
-  .brand b{ font-family: var(--font-display); font-weight:600; font-size:14px; display:block; }
-  .brand span{ display:block; font-family: var(--font-mono); font-size:10px; color:var(--ink-40); margin-top:2px; }
+  .bar{
+    background: var(--glass-strong);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border-radius: 999px;
+    box-shadow: var(--shadow-sm);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+    padding: 8px 8px 8px 14px;
+    margin-bottom: 10px;
+  }
+  .brand{ display:flex; align-items:center; gap: 10px; min-width: 0; }
+  .brand img{ width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; }
+  .brand b{
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    display:block;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+  .brand .deco{
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-40);
+    letter-spacing: .02em;
+    display:none;
+  }
+  @media (min-width: 540px){ .brand .deco{ display:block; } }
+
+  .subnav{
+    display:flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 0 2px 10px;
+    scrollbar-width: none;
+  }
+  .subnav::-webkit-scrollbar{ display:none; }
+  .subnav a{
+    flex-shrink: 0;
+    font-size: 12.5px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    color: var(--ink-80);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 860px){
+    .bar{ padding: 10px 10px 10px 18px; }
+  }
+
+  /* ---------- buttons ---------- */
   .btn{
-    padding: 9px 16px; border-radius: 999px;
-    border: 1px solid var(--glass-border); background: var(--glass-strong);
-    backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-    color: var(--ink); font-family: var(--font-body); font-weight:600; font-size: 13px;
+    cursor:pointer;
+    appearance:none;
+    border-radius: 999px;
+    padding: 12px 20px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-strong);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap: 8px;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+  .btn:disabled{ opacity:.55; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+  .btn-primary{ background: var(--signal); border-color: var(--signal); color: #fff; }
+  .btn-primary:hover{ background: var(--signal-hover); border-color: var(--signal-hover); }
+  .btn-block{ width: 100%; }
+  .btn-sm{ padding: 8px 15px; font-size: 13px; }
+
+  /* ---------- hero ---------- */
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 14px 0 0;
+  }
+  @media (min-width: 920px){
+    .hero-grid{ grid-template-columns: 1.3fr .7fr; align-items: stretch; }
+  }
+  .hero-pane{ padding: 30px 26px; display:flex; flex-direction:column; justify-content:space-between; gap: 20px; }
+  .eyebrow{
+    display:flex; align-items:center; gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--signal-hover);
+    margin: 0 0 14px;
+  }
+  .eyebrow .dot{ width: 7px; height: 7px; border-radius: 50%; background: var(--spark); flex-shrink:0; }
+  h1{
+    font-size: clamp(28px, 6vw, 46px);
+    line-height: 1.08;
+  }
+  h1 .accent{ color: var(--signal); }
+  .lede{
+    margin: 16px 0 0;
+    color: var(--ink-60);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 54ch;
+  }
+  .cta-row{ display:flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .tags{
+    list-style:none;
+    display:flex; flex-wrap: wrap; gap: 8px;
+    margin: 18px 0 0; padding: 0;
+    font-size: 12.5px;
+    color: var(--ink-60);
+  }
+  .tags li{
+    display:inline-flex; align-items:center; gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.45);
+    border: 1px solid var(--glass-border);
   }
 
-  main{ padding-top: 18px; }
-  .card{ padding: 30px 26px; margin: 18px 0 28px; }
-  @media (min-width: 760px){ .card{ padding: 42px; } }
-  h1{ font-family: var(--font-display); font-weight:600; margin: 4px 0 6px; font-size: 26px; letter-spacing:-.01em; }
-  h2{ font-family: var(--font-display); font-weight:600; margin: 24px 0 8px; font-size: 15px; }
-  p, li{ color: var(--ink-60); font-size: 13.5px; line-height: 1.65; }
-  ul{ margin: 8px 0 0 18px; padding:0; }
-  li b, p b{ color: var(--ink); font-weight:600; }
+  /* ---------- founder pane ---------- */
+  .founder-pane{ padding: 26px; display:flex; flex-direction:column; gap: 14px; }
+  .founder-top{ display:flex; align-items:center; gap: 14px; }
+  .founder-photo{
+    flex: 0 0 64px;
+    width: 64px; height: 64px;
+    border-radius: 16px;
+    background-color: rgba(255,255,255,.4);
+    background-image: url("https://data-informed-decisions.com/did_variant_03_lineart.png");
+    background-size: cover;
+    background-position: 70% 35%;
+    border: 1px solid var(--glass-border);
+  }
+  .founder-name{ font-family: var(--font-display); font-weight: 600; font-size: 16px; }
+  .founder-role{ font-size: 12px; color: var(--ink-60); margin-top: 2px; line-height: 1.4; }
+  .founder-quote{ font-size: 14px; color: var(--ink-80); line-height: 1.55; margin: 0; font-style: italic; }
+  .founder-meta{
+    font-size: 12.5px; color: var(--ink-60); line-height: 1.6; margin: 0;
+    padding-top: 12px; border-top: 1px solid var(--hairline);
+  }
+  .founder-meta b{ color: var(--ink); font-weight: 600; }
 
-  footer{ padding: 0 0 40px; font-size: 12.5px; color: var(--ink-40); }
+  /* ---------- generic section ---------- */
+  section.block{ padding: 16px 0; }
+  .panel{ padding: 32px 26px; }
+  @media (min-width: 760px){ .panel{ padding: 44px 44px; } }
+  .sec-eyebrow{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--signal-hover);
+    margin: 0 0 8px;
+  }
+  h2{ font-size: clamp(22px, 4vw, 30px); margin-bottom: 6px; }
+  .sec-sub{ color: var(--ink-60); font-size: 14.5px; max-width: 60ch; margin: 10px 0 0; }
+
+  /* ---------- flow diagram ---------- */
+  .flow-wrap{ margin-top: 30px; }
+  .flow-svg{ width: 100%; height: auto; display:block; }
+  .flow-svg .grid-line{ stroke: var(--hairline); stroke-width: 1; }
+  .flow-svg .noise-dot{ fill: var(--ink-40); opacity: 0; animation: fadein .6s ease-out forwards; }
+  .flow-svg .order-dot{ fill: var(--signal); opacity: 0; animation: fadein2 .6s ease-out forwards; }
+  .flow-svg .funnel{ fill: url(#funnelGrad); opacity: .55; }
+  .flow-svg .trend{
+    fill:none; stroke: var(--signal); stroke-width: 3; stroke-linecap: round;
+    stroke-dasharray: 520; stroke-dashoffset: 520;
+    animation: draw 1.8s .2s cubic-bezier(.4,.05,.2,1) forwards;
+  }
+  .flow-svg .decision-ring{ fill:none; stroke: var(--spark); stroke-width: 2; opacity: 0; animation: ring 1.2s 1.6s ease-out forwards; }
+  .flow-svg .decision{ fill: var(--spark); opacity: 0; animation: pop .5s 1.7s ease-out forwards; }
+  @keyframes draw{ to{ stroke-dashoffset: 0; } }
+  @keyframes pop{ from{ opacity:0; transform: scale(.3); } to{ opacity:1; transform: scale(1); } }
+  @keyframes fadein{ to{ opacity: .45; } }
+  @keyframes fadein2{ to{ opacity: .9; } }
+  @keyframes ring{ 0%{ opacity:0; r:4; } 40%{ opacity:.5; } 100%{ opacity:0; r:16; } }
+  @media (prefers-reduced-motion: reduce){
+    .flow-svg *{ animation: none !important; stroke-dashoffset:0; }
+    .flow-svg .noise-dot{ opacity:.45; }
+    .flow-svg .order-dot{ opacity:.9; }
+    .flow-svg .decision-ring{ opacity:0; }
+    .flow-svg .decision{ opacity:1; }
+  }
+
+  .flow-stages{
+    display:grid; grid-template-columns: 1fr; gap: 14px;
+    margin-top: 22px;
+  }
+  @media (min-width: 760px){
+    .flow-stages{ grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+    .flow-stages > div{ border-left: 1px solid var(--hairline); padding-left: 26px; }
+    .flow-stages > div:first-child{ border-left: none; padding-left: 0; }
+  }
+  .flow-stages .stage-label{
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em;
+    color: var(--signal); text-transform: uppercase; margin: 0 0 6px;
+  }
+  .flow-stages p{ margin:0; color: var(--ink-60); font-size: 13.5px; line-height: 1.55; }
+
+  .flow-caption{ margin-top: 26px; font-size: 14px; color: var(--ink-60); line-height: 1.6; font-style: italic; max-width: 62ch; }
+
+  /* ---------- stack ---------- */
+  .chips{ display:flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+  .chip{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: var(--signal-soft);
+    color: var(--signal-hover);
+    border: 1px solid rgba(23,107,68,.18);
+  }
+
+  /* ---------- split3 (pricing / policies) ---------- */
+  .split3{ display:grid; grid-template-columns: 1fr; gap: 0; margin-top: 8px; }
+  .split3 > div{ padding: 20px 0; border-top: 1px solid var(--hairline); }
+  .split3 > div:first-child{ border-top: none; padding-top: 4px; }
+  @media (min-width: 760px){
+    .split3{ grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+    .split3 > div{ border-top:none; padding: 4px 0 0; border-left: 1px solid var(--hairline); padding-left: 32px; }
+    .split3 > div:first-child{ border-left:none; padding-left: 4px; }
+  }
+  .split3 h3{ font-size: 16px; margin: 0 0 8px; }
+  .split3 p{ margin: 0; color: var(--ink-60); font-size: 13.5px; line-height: 1.6; }
+  .split3 .chips{ margin-top: 14px; }
+  .split3 .chip{ background: rgba(255,255,255,.5); color: var(--ink-60); border-color: var(--glass-border); }
+
+  /* ---------- contact ---------- */
+  .contact-grid{ display:grid; gap: 28px; grid-template-columns: 1fr; margin-top: 10px; }
+  @media (min-width: 900px){ .contact-grid{ grid-template-columns: 1fr 1fr; align-items:start; } }
+  .contact-copy p{ color: var(--ink-60); font-size: 14px; line-height: 1.6; }
+  .contact-copy b{ color: var(--ink); }
+  .inlineEmail{ display:flex; align-items:center; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .kbd{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,.5);
+    color: var(--ink-80);
+  }
+
+  form{ display:grid; gap: 12px; }
+  label{ font-size: 12.5px; color: var(--ink-80); font-weight: 500; display:block; margin-bottom: 5px; }
+  input, textarea{
+    width: 100%;
+    padding: 12px 13px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,.55);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 14px;
+    outline: none;
+    transition: border-color .12s ease, background .12s ease;
+  }
+  input:focus, textarea:focus{ background: rgba(255,255,255,.85); }
+  input::placeholder, textarea::placeholder{ color: var(--ink-40); }
+  textarea{ min-height: 110px; resize: vertical; }
+  input[aria-invalid="true"], textarea[aria-invalid="true"]{ border-color: var(--spark); }
+  .row2{ display:grid; grid-template-columns: 1fr; gap: 12px; }
+  @media (min-width: 560px){ .row2{ grid-template-columns: 1fr 1fr; } }
+  .fieldError{ margin-top: 6px; font-size: 12px; color: var(--spark); display:none; }
+  .fieldError.show{ display:block; }
+  .hint{ font-size: 12px; color: var(--ink-40); margin: 4px 0 0; }
+
+  /* ---------- footer ---------- */
+  footer{ padding: 30px 0 40px; margin-top: 6px; }
+  .footRow{ display:flex; justify-content:space-between; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--ink-40); }
+  .footRow b{ color: var(--ink-80); }
   .tinyLink{ color: var(--ink-60); text-decoration: underline; text-underline-offset: 2px; }
   .tinyLink:hover{ color: var(--signal-hover); }
-  .kbd{
-    font-family: var(--font-mono); font-size: 12px; padding: 6px 10px; border-radius: 999px;
-    border: 1px solid var(--glass-border); background: rgba(255,255,255,.5); color: var(--ink-80);
+
+  /* ---------- toast ---------- */
+  .toast{
+    position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%) translateY(8px);
+    background: var(--ink); color: #fff;
+    padding: 10px 16px; border-radius: 999px;
+    font-size: 12.5px;
+    box-shadow: var(--shadow-sm);
+    opacity: 0; pointer-events:none;
+    transition: opacity .18s ease, transform .18s ease;
+  }
+  .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .btn{ transition:none; }
   }
 </style>
 </head>
@@ -97,59 +405,492 @@
   <div class="bg-field" aria-hidden="true"></div>
 
   <header>
-    <div class="wrap nav">
-      <a class="brand" href="index.html#top" aria-label="Home">
-        <img src="https://data-informed-decisions.com/logo_did.png" alt="Data Informed Decisions Logo" />
-        <div>
-          <b>Data Informed Decisions LLC</b>
-          <span>LEGAL · TERMS · PRIVACY</span>
-        </div>
-      </a>
-      <a class="btn" href="index.html#contact">Contact</a>
+    <div class="wrap">
+      <div class="bar">
+        <a class="brand" href="#top" aria-label="Home">
+          <img src="https://data-informed-decisions.com/logo_did.png" alt="Data Informed Decisions Logo" />
+          <div>
+            <b>Data Informed Decisions LLC</b>
+            <span class="deco">ANALYTICS · TRACKING · AUTOMATION</span>
+          </div>
+        </a>
+        <a class="btn btn-primary btn-sm" href="#contact">Contact</a>
+      </div>
+      <nav class="subnav" aria-label="Primary">
+        <a href="#services">What we do</a>
+        <a href="#stack">Stack</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#policies">Policies</a>
+      </nav>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="glass card">
-      <h1>Legal</h1>
-      <p>
-        Business: <b>Data Informed Decisions LLC</b><br/>
-        Address: 8 The Green, Suite A, Dover, DE 19901 (USA)<br/>
-        Support: <span class="kbd">info@data-informed-decisions.com</span> · <span class="kbd">+1 302 520 5834</span>
-      </p>
+  <main id="top">
 
-      <h2>Terms of Service (general)</h2>
-      <p>
-        We provide digital services only (analytics, tracking, automation, reporting). No physical products are sold.
-        Specific scope, timelines, and fees are confirmed in writing before work starts.
-      </p>
-      <ul>
-        <li><b>Scope:</b> Defined per project or retainer. Client provides required access and information.</li>
-        <li><b>Payments:</b> Prices are in USD unless stated otherwise.</li>
-        <li><b>Delivery:</b> Digital deliverables (documents, dashboards, configurations, calls).</li>
-        <li><b>Results:</b> We aim for measurable clarity, but can't guarantee business outcomes.</li>
-        <li><b>Liability:</b> Limited to the amount paid for the specific service, to the extent permitted by law.</li>
-      </ul>
+    <section class="wrap">
+      <div class="hero-grid">
+        <div class="glass hero-pane">
+          <div>
+            <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Data-driven decisions, without the chaos.</p>
+            <h1>Make your numbers tell the truth — <span class="accent">then act on it.</span></h1>
+            <p class="lede">
+              Data Informed Decisions LLC turns messy digital signals into clear, decision-ready insights:
+              tracking setup, data workflows, analysis, reporting, and automation. Services are digital —
+              no physical products.
+            </p>
+            <div class="cta-row">
+              <button class="btn btn-primary" type="button" onclick="scrollToId('contact')">Start a conversation</button>
+              <button class="btn" type="button" onclick="scrollToId('services')">See capabilities</button>
+            </div>
+          </div>
+          <ul class="tags" aria-label="Highlights">
+            <li>📍 8 The Green, Suite A, Dover, DE 19901</li>
+            <li>🔒 No cookies, no trackers</li>
+            <li>✉️ Email + phone support</li>
+          </ul>
+        </div>
 
-      <h2>Privacy Policy (general)</h2>
-      <p>
-        This website uses no cookies and no tracking scripts. If you contact us, we process the information you provide
-        (name, email, message) solely to respond and deliver services.
-      </p>
-      <ul>
-        <li><b>Data we collect:</b> Only what you send via email / your email client.</li>
-        <li><b>Purpose:</b> Communication, service delivery, billing, and basic record keeping.</li>
-        <li><b>Retention:</b> We keep messages as long as needed for business and legal purposes.</li>
-        <li><b>Hosting logs:</b> Our hosting provider may process standard server logs (IP, timestamps) for security/operations.</li>
-      </ul>
+        <aside class="glass founder-pane" aria-label="Founder">
+          <div class="founder-top">
+            <div class="founder-photo" role="img" aria-label="Founder portrait"></div>
+            <div>
+              <div class="founder-name" id="founderName">Axel</div>
+              <div class="founder-role">Founder (first name only) · data &amp; automation nerd</div>
+            </div>
+          </div>
+          <p class="founder-quote">
+            “I build measurement and decision systems that survive real life: messy websites,
+            shifting goals, and people who just want clarity.”
+          </p>
+          <p class="founder-meta">
+            <b>Scope:</b> web &amp; app analytics, tracking, reporting, automation<br/>
+            <b>Style:</b> minimal overhead · maximum signal · no vanity metrics
+          </p>
+        </aside>
+      </div>
+    </section>
 
-      <h2>Questions</h2>
-      <p>If anything here feels unclear, contact support. Clarity is kind of our whole thing.</p>
-    </div>
+    <section id="services" class="block wrap">
+      <div class="glass panel">
+        <p class="sec-eyebrow">What we do</p>
+        <h2>From raw signal to a decision.</h2>
+        <p class="sec-sub">
+          Every engagement follows the same shape, whatever the channel, tool, or team behind it.
+        </p>
+
+        <div class="flow-wrap">
+          <svg class="flow-svg" viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="funnelGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#176B44" stop-opacity=".10"/>
+                <stop offset="1" stop-color="#176B44" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+
+            <line class="grid-line" x1="0" y1="46" x2="900" y2="46"/>
+            <line class="grid-line" x1="0" y1="110" x2="900" y2="110"/>
+            <line class="grid-line" x1="0" y1="174" x2="900" y2="174"/>
+
+            <path class="funnel" d="M20,30 L300,70 L300,170 L20,200 Z"/>
+
+            <circle class="noise-dot" cx="40" cy="60" r="4" style="animation-delay:.05s"/>
+            <circle class="noise-dot" cx="75" cy="140" r="3.5" style="animation-delay:.10s"/>
+            <circle class="noise-dot" cx="55" cy="170" r="3" style="animation-delay:.12s"/>
+            <circle class="noise-dot" cx="110" cy="50" r="3.5" style="animation-delay:.18s"/>
+            <circle class="noise-dot" cx="135" cy="120" r="4" style="animation-delay:.22s"/>
+            <circle class="noise-dot" cx="95" cy="100" r="3" style="animation-delay:.26s"/>
+            <circle class="noise-dot" cx="170" cy="160" r="3.5" style="animation-delay:.30s"/>
+            <circle class="noise-dot" cx="190" cy="75" r="3" style="animation-delay:.34s"/>
+            <circle class="noise-dot" cx="220" cy="135" r="4" style="animation-delay:.38s"/>
+            <circle class="noise-dot" cx="245" cy="95" r="3" style="animation-delay:.42s"/>
+            <circle class="noise-dot" cx="265" cy="155" r="3.5" style="animation-delay:.46s"/>
+
+            <circle class="order-dot" cx="370" cy="118" r="3.5" style="animation-delay:.55s"/>
+            <circle class="order-dot" cx="430" cy="104" r="3.5" style="animation-delay:.60s"/>
+            <circle class="order-dot" cx="490" cy="92" r="3.5" style="animation-delay:.65s"/>
+            <circle class="order-dot" cx="550" cy="80" r="3.5" style="animation-delay:.70s"/>
+            <circle class="order-dot" cx="610" cy="68" r="3.5" style="animation-delay:.75s"/>
+            <circle class="order-dot" cx="670" cy="56" r="3.5" style="animation-delay:.80s"/>
+
+            <path class="trend" d="M40,150 C 160,150 220,130 320,120 C 420,110 470,95 560,76 C 650,58 700,40 860,26"/>
+            <circle class="decision-ring" cx="860" cy="26" r="4"/>
+            <circle class="decision" cx="860" cy="26" r="6.5"/>
+          </svg>
+
+          <div class="flow-stages">
+            <div>
+              <p class="stage-label">Raw signal</p>
+              <p>Whatever already exists — scattered, partial, recorded differently everywhere.</p>
+            </div>
+            <div>
+              <p class="stage-label">Structure</p>
+              <p>Pulled into one shape: defined once, named consistently, connected to context.</p>
+            </div>
+            <div>
+              <p class="stage-label">Decision</p>
+              <p>Reduced to the few numbers that actually change what you do next.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack" class="block wrap">
+      <div class="glass panel">
+        <p class="sec-eyebrow">Tools &amp; stack</p>
+        <h2>Google-centric, system-first.</h2>
+        <p class="sec-sub">
+          The tools are mostly Google-shaped, because that's where the data already lives. The real
+          work is system design: consistent definitions, clean data, and transparent assumptions.
+        </p>
+        <div class="chips" aria-label="Stack chips">
+          <span class="chip">Google Analytics 4</span>
+          <span class="chip">Google Tag Manager</span>
+          <span class="chip">BigQuery</span>
+          <span class="chip">Looker Studio</span>
+          <span class="chip">Google Sheets</span>
+          <span class="chip">Apps Script</span>
+          <span class="chip">SQL</span>
+          <span class="chip">APIs</span>
+          <span class="chip">Python / R</span>
+          <span class="chip">AI &amp; LLM</span>
+          <span class="chip">Automation &amp; workflows</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="block wrap">
+      <div class="glass panel">
+        <p class="sec-eyebrow">Pricing (USD)</p>
+        <h2>Three ways to work together.</h2>
+        <div class="split3">
+          <div>
+            <h3>Project-based</h3>
+            <p>Fixed-scope implementations and audits. Price depends on scope and access.</p>
+            <div class="chips">
+              <span class="chip">Projects start at $750 USD</span>
+              <span class="chip">Digital delivery</span>
+            </div>
+          </div>
+          <div>
+            <h3>Hourly</h3>
+            <p>Consulting and troubleshooting for tracking, reporting, and automation.</p>
+            <div class="chips">
+              <span class="chip">Hourly available (USD)</span>
+              <span class="chip">By appointment</span>
+            </div>
+          </div>
+          <div>
+            <h3>Monthly retainer</h3>
+            <p>Ongoing reporting, monitoring, and improvement cycles.</p>
+            <div class="chips">
+              <span class="chip">Retainers available (USD)</span>
+              <span class="chip">Cancelable (see Policies)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="policies" class="block wrap">
+      <div class="glass panel">
+        <p class="sec-eyebrow">Policies</p>
+        <h2>Services only — kept simple.</h2>
+        <div class="split3">
+          <div>
+            <h3>Service delivery</h3>
+            <p>
+              Services are delivered digitally (documents, dashboards, configurations, calls).
+              After purchase we confirm scope in writing and schedule delivery based on availability.
+            </p>
+          </div>
+          <div>
+            <h3>Cancellation</h3>
+            <p>
+              You can request cancellation before work starts. For ongoing retainers, cancellation
+              takes effect at the end of the current billing period unless agreed otherwise.
+            </p>
+          </div>
+          <div>
+            <h3>Refunds</h3>
+            <p>
+              If work has not started, we refund in full. If work has started, refunds are handled fairly
+              based on delivered work and remaining scope. Contact support first — we resolve issues fast.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="block wrap" aria-label="Contact">
+      <div class="glass panel">
+        <p class="sec-eyebrow">Contact</p>
+        <h2>Tell me what you're trying to decide.</h2>
+
+        <div class="contact-grid">
+          <div class="contact-copy">
+            <p>
+              This form opens your email client and sends to <b><span id="emailInline"></span></b>.
+              No backend, no storage, no tracking.
+            </p>
+            <p>
+              Support: <b><span id="emailInline2"></span></b> · <b><span id="phoneInline"></span></b><br/>
+              Address: 8 The Green, Suite A, Dover, DE 19901 · Hours: Mon–Fri, 9:00–17:00 (ET)
+            </p>
+
+            <div class="inlineEmail" aria-label="Direct contact options">
+              <span class="kbd" id="emailKbd"></span>
+              <button class="btn btn-sm" type="button" onclick="copyEmail()">📋 Copy email</button>
+              <a class="btn btn-sm" id="mailtoLink" href="#">↗ Open email</a>
+            </div>
+            <div class="inlineEmail">
+              <span class="kbd" id="phoneKbd"></span>
+              <button class="btn btn-sm" type="button" onclick="copyPhone()">📋 Copy phone</button>
+              <a class="btn btn-sm" id="telLink" href="#">📞 Call</a>
+            </div>
+
+            <p style="margin-top:18px;">
+              Quick start: your goal, what you measure today, and what “success” means.
+              If not — also fine. I'm not your boss. (Sadly.)
+            </p>
+          </div>
+
+          <form id="contactForm">
+            <input type="hidden" id="form_ts" name="form_ts" value="" />
+
+            <div class="row2">
+              <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" placeholder="Your name" autocomplete="name" maxlength="80" />
+                <div class="fieldError" id="err_name" aria-live="polite"></div>
+              </div>
+              <div>
+                <label for="from">Your email <span style="opacity:.7;">(required)</span></label>
+                <input id="from" name="from" type="email" inputmode="email" placeholder="you@example.com"
+                       autocomplete="email" required maxlength="120" aria-describedby="err_from" />
+                <div class="fieldError" id="err_from" aria-live="polite"></div>
+              </div>
+            </div>
+
+            <div>
+              <label for="topic">Topic</label>
+              <input id="topic" name="topic" placeholder="Tracking, dashboards, automation, etc." maxlength="120" />
+              <div class="fieldError" id="err_topic" aria-live="polite"></div>
+            </div>
+
+            <div>
+              <label for="msg">Message <span style="opacity:.7;">(required)</span></label>
+              <textarea id="msg" name="msg" placeholder="A few lines are enough." required maxlength="2500" aria-describedby="err_msg"></textarea>
+              <div class="fieldError" id="err_msg" aria-live="polite"></div>
+            </div>
+
+            <div style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+              <label for="honeypot">Leave this field empty</label>
+              <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <button class="btn btn-primary btn-block" id="sendBtn" type="submit">✉️ Send via email client</button>
+            <p class="hint">Tip: if the button does nothing, your browser blocks <span class="kbd" style="padding:2px 7px;">mailto:</span>. Use “Copy email”.</p>
+          </form>
+        </div>
+      </div>
+    </section>
 
     <footer>
-      <a class="tinyLink" href="index.html#top">Back to main site</a>
+      <div class="wrap footRow">
+        <div>
+          <div><b>Data Informed Decisions LLC</b></div>
+          <div>8 The Green, Suite A, Dover, DE 19901 · Operating globally</div>
+        </div>
+        <div>
+          <div><a class="tinyLink" href="#top">Back to top</a></div>
+          <div style="margin-top:6px;">This page uses <b>zero</b> cookies and <b>zero</b> trackers.</div>
+          <div style="margin-top:6px;">
+            <a class="tinyLink" href="#pricing">Pricing</a> ·
+            <a class="tinyLink" href="#policies">Policies</a> ·
+            <a class="tinyLink" href="legal.html">Legal (Terms &amp; Privacy)</a>
+          </div>
+        </div>
+      </div>
     </footer>
   </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const FOUNDER_NAME = "Axel";
+    const CONTACT_EMAIL = "info@data-informed-decisions.com";
+    const SUPPORT_PHONE_DISPLAY = "+1 302 520 5834";
+    const SUPPORT_PHONE_TEL = "+13025205834";
+
+    const MIN_FILL_MS = 2500;
+    const RATE_LIMIT_MS = 30 * 1000;
+
+    document.getElementById("founderName").textContent = FOUNDER_NAME;
+
+    const emailKbdEl = document.getElementById("emailKbd");
+    const emailInlineEl = document.getElementById("emailInline");
+    const emailInlineEl2 = document.getElementById("emailInline2");
+    const mailtoLinkEl = document.getElementById("mailtoLink");
+    if (emailKbdEl) emailKbdEl.textContent = CONTACT_EMAIL;
+    if (emailInlineEl) emailInlineEl.textContent = CONTACT_EMAIL;
+    if (emailInlineEl2) emailInlineEl2.textContent = CONTACT_EMAIL;
+    if (mailtoLinkEl) mailtoLinkEl.href = `mailto:${CONTACT_EMAIL}`;
+
+    const phoneInlineEl = document.getElementById("phoneInline");
+    const phoneKbdEl = document.getElementById("phoneKbd");
+    const telLinkEl = document.getElementById("telLink");
+    if (phoneInlineEl) phoneInlineEl.textContent = SUPPORT_PHONE_DISPLAY;
+    if (phoneKbdEl) phoneKbdEl.textContent = SUPPORT_PHONE_DISPLAY;
+    if (telLinkEl) telLinkEl.href = `tel:${SUPPORT_PHONE_TEL}`;
+
+    const tsEl = document.getElementById("form_ts");
+    const startTs = Date.now();
+    if (tsEl) tsEl.value = String(startTs);
+
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    const toastEl = document.getElementById("toast");
+    let toastTimer = null;
+    function toast(msg){
+      toastEl.textContent = msg;
+      toastEl.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1800);
+    }
+
+    async function copyEmail(){
+      try{
+        await navigator.clipboard.writeText(CONTACT_EMAIL);
+        toast("Email copied.");
+      }catch(e){
+        const t = document.createElement("textarea");
+        t.value = CONTACT_EMAIL;
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand("copy");
+        document.body.removeChild(t);
+        toast("Email copied.");
+      }
+    }
+
+    async function copyPhone(){
+      try{
+        await navigator.clipboard.writeText(SUPPORT_PHONE_DISPLAY);
+        toast("Phone copied.");
+      }catch(e){
+        const t = document.createElement("textarea");
+        t.value = SUPPORT_PHONE_DISPLAY;
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand("copy");
+        document.body.removeChild(t);
+        toast("Phone copied.");
+      }
+    }
+
+    window.copyEmail = copyEmail;
+    window.copyPhone = copyPhone;
+    window.scrollToId = scrollToId;
+
+    function setErr(id, msg){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.textContent = msg || "";
+      el.classList.toggle("show", Boolean(msg));
+    }
+    function clearErrs(){
+      setErr("err_name", "");
+      setErr("err_from", "");
+      setErr("err_topic", "");
+      setErr("err_msg", "");
+      ["name","from","topic","msg"].forEach(fid => {
+        const f = document.getElementById(fid);
+        if (f) f.removeAttribute("aria-invalid");
+      });
+    }
+    function markInvalid(fieldId, errId, msg){
+      const f = document.getElementById(fieldId);
+      if (f) f.setAttribute("aria-invalid", "true");
+      setErr(errId, msg);
+    }
+    function isProbablyEmail(v){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+
+    document.getElementById("contactForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      clearErrs();
+
+      const sendBtn = document.getElementById("sendBtn");
+      const name = (document.getElementById("name").value || "").trim();
+      const from = (document.getElementById("from").value || "").trim();
+      const topic = (document.getElementById("topic").value || "").trim();
+      const msg = (document.getElementById("msg").value || "").trim();
+      const honeypot = (document.getElementById("honeypot").value || "").trim();
+
+      if (honeypot.length > 0){
+        toast("Nice try, robot.");
+        return;
+      }
+
+      const filledInMs = Date.now() - startTs;
+      if (filledInMs < MIN_FILL_MS){
+        toast("Please try again (spam protection).");
+        return;
+      }
+
+      const last = Number(localStorage.getItem("did_last_mailto_ts") || "0");
+      if (last && (Date.now() - last) < RATE_LIMIT_MS){
+        toast("Please wait a bit and try again.");
+        return;
+      }
+
+      let ok = true;
+      if (from.length === 0){
+        markInvalid("from", "err_from", "Please enter your email.");
+        ok = false;
+      } else if (!isProbablyEmail(from)){
+        markInvalid("from", "err_from", "That email looks off. Please double-check.");
+        ok = false;
+      }
+
+      if (msg.length === 0){
+        markInvalid("msg", "err_msg", "Please add a short message.");
+        ok = false;
+      } else if (msg.length < 10){
+        markInvalid("msg", "err_msg", "Give me at least 10 characters. One-word mysteries don't help.");
+        ok = false;
+      }
+
+      if (!ok) return;
+
+      const subject = topic ? `Inquiry — ${topic}` : "Inquiry — Data Informed Decisions LLC";
+      const lines = [
+        `Hi Data Informed Decisions LLC,`,
+        ``,
+        msg,
+        ``,
+        `—`,
+        name ? `Name: ${name}` : null,
+        from ? `Email: ${from}` : null,
+        `Sent from: data-informed-decisions.com`
+      ].filter(Boolean);
+
+      const body = lines.join("\n");
+      const mailto = `mailto:${encodeURIComponent(CONTACT_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      localStorage.setItem("did_last_mailto_ts", String(Date.now()));
+
+      if (sendBtn) sendBtn.disabled = true;
+      toast("Opening your email client…");
+      window.location.href = mailto;
+      setTimeout(() => { if (sendBtn) sendBtn.disabled = false; }, 1200);
+    });
+  </script>
 </body>
 </html>
