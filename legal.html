@@ -1,184 +1,171 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Legal — Terms &amp; Privacy | Data Informed Decisions LLC</title>
-<meta name="description" content="Terms of Service and Privacy Policy for Data Informed Decisions LLC." />
-<link rel="icon" href="https://data-informed-decisions.com/logo_did.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="Data Informed Decisions LLC — Legal: Terms of Service & Privacy Policy."/>
+<title>Legal — Data Informed Decisions LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg-1: #EEEEF3;
-    --bg-2: #F2F5EE;
-    --paper: #F4F4F1;
-    --ink: #14181A;
-    --ink-soft: #3C444A;
-    --muted: #616B72;
-    --forest: #176B44;
-    --forest-soft: #E4F0EA;
-    --coral: #E2572C;
-    --glass-bg: rgba(255,255,255,0.6);
-    --glass-bg-strong: rgba(255,255,255,0.7);
-    --glass-border: rgba(255,255,255,0.7);
-    --line: rgba(20,24,26,0.10);
-    --shadow: 0 30px 80px -30px rgba(20,40,32,0.24), 0 8px 24px -12px rgba(20,40,32,0.10);
-    --radius-xl: 30px;
-    --font-head: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
-    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  }
-  *{ box-sizing: border-box; }
-  body{
-    margin: 0;
-    background: linear-gradient(155deg, var(--bg-1) 0%, var(--bg-2) 55%, var(--paper) 100%);
-    color: var(--ink);
-    font-family: var(--font-body);
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
-  h1,h2{ font-family: var(--font-head); letter-spacing: -0.02em; margin: 0; }
-  .mono{ font-family: var(--font-mono); }
-  .blob-field{ position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-  .blob{ position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.5; }
-  .blob-a{ width: 520px; height: 520px; background: #A9E4CF; top: -160px; left: -140px; }
-  .blob-b{ width: 460px; height: 460px; background: #F3B7A2; top: 60vh; right: -160px; }
-
-  .topbar{
-    position: sticky; top: 0; z-index: 10; padding: 18px 24px;
-    display: flex; justify-content: center;
-  }
-  .topbar-inner{
-    display: flex; align-items: center; justify-content: space-between; gap: 20px;
-    max-width: 900px; width: 100%;
-    background: var(--glass-bg-strong); border: 1px solid var(--glass-border);
-    -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
-    border-radius: 999px; padding: 10px 18px; box-shadow: var(--shadow);
-  }
-  .topbar-logo{ display: flex; align-items: center; gap: 8px; font-family: var(--font-head); font-weight: 600; font-size: 15px; }
-  .topbar-logo img{ height: 24px; width: 24px; object-fit: contain; border-radius: 6px; }
-  .back-link{ text-decoration: none; color: var(--forest); font-size: 13.5px; font-weight: 600; }
-
-  main{ position: relative; z-index: 1; max-width: 820px; margin: 0 auto; padding: 60px 24px 100px; }
-  .page-head{ margin-bottom: 40px; }
-  .kicker{ font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--forest); margin-bottom: 14px; display:block; }
-  h1{ font-size: clamp(30px, 5vw, 44px); }
-  .updated{ margin-top: 10px; color: var(--muted); font-size: 13.5px; }
-
-  .panel{
-    background: var(--glass-bg); border: 1px solid var(--glass-border);
-    -webkit-backdrop-filter: blur(26px) saturate(180%); backdrop-filter: blur(26px) saturate(180%);
-    border-radius: var(--radius-xl); box-shadow: var(--shadow);
-    padding: 38px 40px; margin-bottom: 26px;
-  }
-  .panel h2{ font-size: 21px; font-weight: 600; margin-bottom: 14px; color: var(--forest); }
-  .panel p{ color: var(--ink-soft); font-size: 15px; margin: 0 0 12px; }
-  .panel p:last-child{ margin-bottom: 0; }
-  .panel ul{ margin: 0 0 12px; padding-left: 20px; color: var(--ink-soft); font-size: 15px; }
-  .panel li{ margin-bottom: 6px; }
-  .contact-block{ font-size: 15px; color: var(--ink-soft); }
-  .contact-block b{ color: var(--ink); }
-
-  footer{ padding: 40px 24px 50px; text-align: center; color: var(--muted); font-size: 13px; position: relative; z-index: 1; }
+:root{
+  --bg:#EDF2EA;--ink:#14201A;--ink-60:rgba(20,32,26,.62);--ink-40:rgba(20,32,26,.40);
+  --glass:rgba(255,255,255,.48);--glass-hi:rgba(255,255,255,.72);--glass-b:rgba(255,255,255,.70);
+  --hairline:rgba(20,32,26,.08);--green:#176B44;--green-d:#0F4E32;--green-s:rgba(23,107,68,.12);
+  --blur:blur(26px) saturate(180%);
+  --sh-glass:0 24px 60px rgba(20,32,26,.10),0  1px 0 rgba(255,255,255,.75) inset;
+  --sh-sm:0 6px 18px rgba(20,32,26,.08);--focus:0 0 0 3px rgba(23,107,68,.30);
+  --r-pill:999px;--r-lg:28px;--r-md:18px;--r-sm:12px;--max:1140px;
+  --font-d:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --font-b:"Inter",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --font-m:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--font-b);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+h1,h2{font-family:var(--font-d);font-weight:600;letter-spacing:-.01em;}
+a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus);border-radius:8px;}
+.wrap{width:min(var(--max),92vw);margin:0 auto;}
+.bg{position:fixed;inset:0;z-index:-1;pointer-events:none;}
+.bg-b{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;}
+.b1{width:900px;height:700px;top:-10%;left:-15%;background:radial-gradient(ellipse,rgba(80,200,140,.55),transparent 70%);}
+.b2{width:700px;height:600px;top:-5%;right:-12%;background:radial-gradient(ellipse,rgba(226,87,44,.28),transparent 70%);}
+.glass{background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--r-lg);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--sh-glass);}
+header{position:sticky;top:0;z-index:40;padding:12px 0 0;}
+.pill-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 8px 8px 14px;border-radius:var(--r-pill);background:var(--glass-hi);border:1px solid var(--glass-b);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--sh-sm);}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand img{width:34px;height:34px;border-radius:9px;}
+.brand b{font-family:var(--font-d);font-size:14px;font-weight:600;display:block;}
+.brand span{font-family:var(--font-m);font-size:10px;color:var(--ink-40);display:block;margin-top:2px;}
+.btn{cursor:pointer;appearance:none;border-radius:var(--r-pill);padding:8px 16px;border:1px solid var(--glass-b);background:var(--glass-hi);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);color:var(--ink);font-family:var(--font-b);font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px;}
+.lang-toggle{display:flex;border-radius:var(--r-pill);border:1px solid var(--hairline);overflow:hidden;background:rgba(255,255,255,.35);}
+.lang-toggle button{font-family:var(--font-m);font-size:11px;font-weight:500;padding:6px 10px;border:none;background:transparent;cursor:pointer;color:var(--ink-60);}
+.lang-toggle button.active{background:var(--green);color:#fff;}
+main{padding:18px 0 48px;}
+.card{padding:32px 24px;margin:14px 0;}
+@media(min-width:700px){.card{padding:48px 48px;}}
+h1{font-size:28px;margin-bottom:8px;}
+h2{font-size:16px;margin:24px 0 8px;}
+p,li{color:var(--ink-60);font-size:13.5px;line-height:1.7;}
+ul{margin:8px 0 0 18px;}
+b{color:var(--ink);font-weight:600;}
+.kbd{font-family:var(--font-m);font-size:12px;padding:5px 10px;border-radius:var(--r-pill);border:1px solid var(--glass-b);background:rgba(255,255,255,.5);color:var(--ink);}
+footer{padding:0 0 40px;font-size:12.5px;color:var(--ink-40);}
+.tl{color:var(--ink-60);text-decoration:underline;text-underline-offset:2px;}
+.tl:hover{color:var(--green-d);}
 </style>
 </head>
 <body>
-
-<div class="blob-field" aria-hidden="true">
-  <div class="blob blob-a"></div>
-  <div class="blob blob-b"></div>
+<div class="bg" aria-hidden="true">
+  <div class="bg-b b1"></div>
+  <div class="bg-b b2"></div>
 </div>
 
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="topbar-logo">
-      <img src="https://data-informed-decisions.com/logo_did.png" alt="Data Informed Decisions LLC logo" />
-      DID LLC
-    </div>
-    <a class="back-link" href="index.html">← Back to site</a>
-  </div>
-</div>
-
-<main>
-  <div class="page-head">
-    <span class="kicker">Legal</span>
-    <h1>Terms &amp; Privacy</h1>
-    <p class="updated">Last updated: July 13, 2026</p>
-  </div>
-
-  <div class="panel">
-    <h2>1. Who we are</h2>
-    <p>Data Informed Decisions LLC ("DID LLC," "we," "us") is a US-based consultancy providing data tracking, automation, analysis, and reporting services. This page explains the terms under which we provide those services, and how we handle any information you share with us.</p>
-    <div class="contact-block">
-      <p><b>Data Informed Decisions LLC</b><br />
-      8 The Green, Suite A, Dover, DE 19901<br />
-      Email: info@data-informed-decisions.com<br />
-      Phone: +1 (716) 296-0224<br />
-      Hours: Mon–Fri, 9:00–17:00 (ET)</p>
+<header>
+  <div class="wrap pill-nav">
+    <a class="brand" href="index.html#top">
+      <img src="https://data-informed-decisions.com/logo_did.png" alt="DID Logo"/>
+      <div>
+        <b>Data Informed Decisions LLC</b>
+        <span data-en="LEGAL · TERMS · PRIVACY" data-de="RECHTLICHES · AGB · DATENSCHUTZ">LEGAL · TERMS · PRIVACY</span>
+      </div>
+    </a>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button data-lang-btn="en" class="active" onclick="setLang('en')">EN</button>
+        <button data-lang-btn="de" onclick="setLang('de')">DE</button>
+      </div>
+      <a class="btn" href="index.html#contact" data-en="← Back" data-de="← Zurück">← Back</a>
     </div>
   </div>
+</header>
 
-  <div class="panel">
-    <h2>2. Terms of Service</h2>
-    <p>By engaging Data Informed Decisions LLC for services, you agree to the following terms.</p>
-    <ul>
-      <li><b>Scope of work.</b> All engagements are confirmed in writing (email or signed proposal) before work begins. Deliverables are digital only: documentation, dashboards, configuration, code, and video or live calls.</li>
-      <li><b>Project-based work.</b> Pricing starts at $750 USD for a defined, fixed scope. Changes to scope may affect price and timeline and will be agreed in writing.</li>
-      <li><b>Hourly work.</b> Available by appointment for consulting and troubleshooting, billed in USD at the rate confirmed before the engagement begins.</li>
-      <li><b>Monthly retainers.</b> Ongoing engagements billed monthly in USD. Retainers are cancelable — see Section 3, Cancellation.</li>
-      <li><b>Client responsibilities.</b> You are responsible for providing timely access to systems, accounts, and stakeholders needed to complete the agreed work.</li>
-      <li><b>No guarantee of business outcomes.</b> We provide data, tooling, and analysis; business decisions and their results remain your responsibility.</li>
-    </ul>
-  </div>
+<main class="wrap">
+  <div class="glass card">
 
-  <div class="panel">
-    <h2>3. Cancellation</h2>
-    <ul>
-      <li><b>Before work starts:</b> Full cancellation is available at no charge.</li>
-      <li><b>Retainers:</b> Cancellation takes effect at the end of the current billing period. No partial-month refunds are issued for retainers already in progress.</li>
-      <li><b>Project-based work:</b> Once work has started, cancellation is handled under the Refunds policy below.</li>
-    </ul>
-  </div>
+    <div class="lang-en">
+      <h1>Legal</h1>
+      <p><b>Business:</b> Data Informed Decisions LLC<br/>
+      <b>Address:</b> 8 The Green, Suite A, Dover, DE 19901 (USA)<br/>
+      <b>Support:</b> <span class="kbd">info@data-informed-decisions.com</span> · <span class="kbd">+1 (716) 296-0224</span></p>
 
-  <div class="panel">
-    <h2>4. Refunds</h2>
-    <ul>
-      <li><b>Work not started:</b> Full refund.</li>
-      <li><b>Work started:</b> A fair, pro-rata refund based on work completed at the time of cancellation.</li>
-      <li>Please contact us first at <b>info@data-informed-decisions.com</b> before disputing a charge — most issues are resolved directly and quickly.</li>
-    </ul>
-  </div>
+      <h2>Terms of Service</h2>
+      <p>We provide digital services only — analytics, tracking, automation, reporting. No physical products are sold. Scope, timelines, and fees are confirmed in writing before work starts.</p>
+      <ul>
+        <li><b>Scope:</b> Defined per project or retainer. Client provides required access and information.</li>
+        <li><b>Payments:</b> In USD unless otherwise stated.</li>
+        <li><b>Delivery:</b> Digital deliverables only (documents, dashboards, configurations, calls).</li>
+        <li><b>Results:</b> We aim for measurable clarity, but cannot guarantee specific business outcomes.</li>
+        <li><b>Liability:</b> Limited to the amount paid for the specific service, to the extent permitted by law.</li>
+      </ul>
 
-  <div class="panel">
-    <h2>5. Privacy Policy</h2>
-    <p>We collect only what's needed to communicate with you and deliver services.</p>
-    <ul>
-      <li><b>What we collect.</b> Information you provide directly — name, email address, phone number, and the content of your messages — when you contact us via email, phone, or our contact form.</li>
-      <li><b>How we use it.</b> Solely to respond to inquiries, scope and deliver engagements, and handle billing for active clients.</li>
-      <li><b>No cookies, no trackers.</b> This website does not use cookies, analytics scripts, or third-party trackers. Nothing about your visit is logged or sold.</li>
-      <li><b>Contact form.</b> The form on this site opens your own email client (mailto) — no message content passes through or is stored on our servers.</li>
-      <li><b>Data sharing.</b> We do not sell or share your information with third parties, except where required by law or to deliver services you've explicitly engaged us for (e.g., a subprocessor named in a signed proposal).</li>
-      <li><b>Data retention.</b> Client communications and records are retained only as long as needed for the engagement and applicable legal/tax requirements.</li>
-      <li><b>Your rights.</b> You may request access to, correction of, or deletion of personal information we hold about you by emailing info@data-informed-decisions.com.</li>
-    </ul>
-  </div>
+      <h2>Privacy Policy</h2>
+      <p>This website uses no cookies and no tracking scripts. If you contact us, we process only what you provide — name, email, message — solely to respond and deliver services.</p>
+      <ul>
+        <li><b>Data collected:</b> Only what you send via your email client.</li>
+        <li><b>Purpose:</b> Communication, service delivery, billing, and legal record-keeping.</li>
+        <li><b>Retention:</b> As long as required for business and legal purposes.</li>
+        <li><b>Hosting:</b> Our hosting provider may log standard server data (IP, timestamps) for security purposes.</li>
+      </ul>
 
-  <div class="panel">
-    <h2>6. Governing law</h2>
-    <p>These terms are governed by the laws of the State of Delaware, USA, without regard to conflict-of-law principles. Any disputes will be handled in a manner consistent with Delaware law.</p>
-  </div>
+      <h2>Questions</h2>
+      <p>If anything here is unclear, contact support. Clarity is kind of our whole thing.</p>
+    </div>
 
-  <div class="panel">
-    <h2>7. Changes to this page</h2>
-    <p>We may update these terms from time to time. The "Last updated" date at the top of this page reflects the most recent revision. Continued use of our services after changes constitutes acceptance of the updated terms.</p>
+    <div class="lang-de" hidden>
+      <h1>Rechtliches</h1>
+      <p><b>Unternehmen:</b> Data Informed Decisions LLC<br/>
+      <b>Adresse:</b> 8 The Green, Suite A, Dover, DE 19901 (USA)<br/>
+      <b>Support:</b> <span class="kbd">info@data-informed-decisions.com</span> · <span class="kbd">+1 (716) 296-0224</span></p>
+
+      <h2>Allgemeine Geschäftsbedingungen</h2>
+      <p>Wir erbringen ausschließlich digitale Dienstleistungen — Analytics, Tracking, Automatisierung, Reporting. Es werden keine physischen Produkte verkauft. Scope, Timelines und Preise werden schriftlich vereinbart, bevor die Arbeit beginnt.</p>
+      <ul>
+        <li><b>Scope:</b> Projekt- oder Retainer-spezifisch definiert. Der Auftraggeber stellt erforderliche Zugänge und Informationen bereit.</li>
+        <li><b>Zahlungen:</b> In USD, sofern nicht anders vereinbart.</li>
+        <li><b>Lieferung:</b> Ausschließlich digital (Dokumente, Dashboards, Konfigurationen, Gespräche).</li>
+        <li><b>Ergebnisse:</b> Wir streben nach messbarer Klarheit, können jedoch keine konkreten Geschäftsergebnisse garantieren.</li>
+        <li><b>Haftung:</b> Begrenzt auf den für die jeweilige Leistung bezahlten Betrag, soweit gesetzlich zulässig.</li>
+      </ul>
+
+      <h2>Datenschutzerklärung</h2>
+      <p>Diese Website verwendet keine Cookies und keine Tracking-Skripte. Bei Kontaktaufnahme verarbeiten wir ausschließlich, was du uns mitteilst — Name, E-Mail, Nachricht — ausschließlich zur Beantwortung und Leistungserbringung.</p>
+      <ul>
+        <li><b>Erhobene Daten:</b> Nur das, was du über deinen E-Mail-Client sendest.</li>
+        <li><b>Zweck:</b> Kommunikation, Leistungserbringung, Abrechnung und rechtliche Aufbewahrung.</li>
+        <li><b>Aufbewahrung:</b> Solange für geschäftliche und rechtliche Zwecke erforderlich.</li>
+        <li><b>Hosting:</b> Unser Hosting-Anbieter kann standardmäßige Server-Daten (IP, Zeitstempel) zu Sicherheitszwecken protokollieren.</li>
+      </ul>
+
+      <h2>Fragen</h2>
+      <p>Wenn etwas unklar ist, meld dich beim Support. Klarheit ist quasi unser Kerngeschäft.</p>
+    </div>
+
   </div>
+  <footer>
+    <a class="tl" href="index.html#top" data-en="← Back to main site" data-de="← Zurück zur Hauptseite">← Back to main site</a>
+  </footer>
 </main>
 
-<footer>
-  Data Informed Decisions LLC · 8 The Green, Suite A, Dover, DE 19901 · <a href="index.html" style="color:var(--forest); text-decoration:none;">Back to site</a>
-</footer>
-
+<script>
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-en][data-de]').forEach(el => {
+    if(!el.children.length) el.textContent = el.dataset[lang] || el.dataset.en;
+  });
+  document.querySelectorAll('.lang-en,.lang-de').forEach(el => {
+    el.hidden = !el.classList.contains('lang-' + lang);
+  });
+  document.querySelectorAll('[data-lang-btn]').forEach(b => {
+    b.classList.toggle('active', b.dataset.langBtn === lang);
+  });
+  try{ localStorage.setItem('did_lang', lang); }catch(e){}
+}
+(function(){
+  try{ const s = localStorage.getItem('did_lang'); if(s==='de') setLang('de'); }catch(e){}
+})();
+window.setLang = setLang;
+</script>
 </body>
 </html>
