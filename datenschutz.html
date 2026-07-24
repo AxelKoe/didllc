@@ -98,6 +98,7 @@
   .panel li{ margin-bottom: 6px; }
   .contact-block{ font-size: 15px; color: var(--ink-soft); }
   .contact-block b{ color: var(--ink); }
+  .panel code{ font-family: var(--font-mono); font-size: 0.92em; background: var(--forest-soft); color: var(--forest); padding: 1px 6px; border-radius: 5px; }
   .badge{
     display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
     text-transform: uppercase; color: var(--forest); background: var(--forest-soft);
@@ -220,11 +221,11 @@
 
     <h3>5.3 Nutzungs- und Gerätedaten</h3>
     <span class="badge">Art. 6 (1) f DSGVO</span>
-    <p>Zur Bereitstellung, Absicherung und Fehleranalyse der App verarbeiten wir technische Daten wie Gerätetyp, Betriebssystem-Version, IP-Adresse, App-Ereignisse (z. B. genutzte Funktionen) und Absturz-/Fehlerprotokolle (Crash-Logs).</p>
+    <p>Zur Bereitstellung und Absicherung der App verarbeiten wir technische Daten wie Gerätetyp, Betriebssystem-Version, IP-Adresse und App-Ereignisse (z. B. genutzte Funktionen). In der App ist derzeit keine dedizierte Absturzberichte-Software (Crash-Reporting-SDK) integriert; automatisierte Absturzprotokolle im engeren Sinne fallen bei uns aktuell nicht an. Sollte sich dies ändern (z. B. durch Einbindung eines Crash-Reporting-Dienstes), wird dieser Abschnitt entsprechend ergänzt.</p>
 
     <h3>5.4 Zahlungsdaten</h3>
     <span class="badge">Art. 6 (1) b, c DSGVO</span>
-    <p>Kostenpflichtige Funktionen (Abonnements) werden über den Zahlungsdienstleister Stripe abgewickelt (Checkout, Kunden-Portal, Abo-Verwaltung). Wir speichern selbst keine vollständigen Zahlungsdaten (z. B. Kreditkartennummern) — diese werden ausschließlich von Stripe verarbeitet. In unserem Backend wird lediglich eine Kunden-Referenz-ID (stripe_customer_id) zur Zuordnung des Abonnements gespeichert.</p>
+    <p>Kostenpflichtige Funktionen (Abonnements) werden über den Zahlungsdienstleister Stripe abgewickelt (Checkout, Kunden-Portal, Abo-Verwaltung). Wir speichern selbst keine vollständigen Zahlungsdaten (z. B. Kreditkartennummern) — diese werden ausschließlich von Stripe verarbeitet. In unserem Backend speichern wir zur Verwaltung Ihres Abonnements folgende Referenz- und Statusdaten: die Stripe-Kunden-ID (<code>stripe_customer_id</code>), die Stripe-Abonnement-ID (<code>stripe_subscription_id</code>), den gebuchten Plan, den Abo-Status (z. B. aktiv, gekündigt, überfällig) sowie die zugehörigen Laufzeit- bzw. Abrechnungszeitraum-Daten.</p>
 
     <h3>5.5 Push-Benachrichtigungen</h3>
     <span class="badge">Art. 6 (1) a, f DSGVO</span>
@@ -245,6 +246,14 @@
     <h3>5.9 CRM (interne Nutzung)</h3>
     <span class="badge">Art. 6 (1) f DSGVO</span>
     <p>Wir nutzen HubSpot als Kunden-Beziehungs-Management-System (CRM) für interne Zwecke, etwa zur Verwaltung von Kontakt- und Support-Anfragen. HubSpot ist eingerichtet, wird derzeit aber nur in eingeschränktem Umfang (intern, administrativ) verwendet. Wir weisen es hier vorsorglich vollständig aus, da die technische Berechtigung zur Datenübertragung besteht.</p>
+
+    <h3>5.10 Sprachausgabe (Text-to-Speech)</h3>
+    <span class="badge">Art. 6 (1) f DSGVO</span>
+    <p>Bestimmte Inhalte können per Sprachausgabe vorgelesen werden. Dabei nutzen wir die im jeweiligen Browser bzw. Betriebssystem eingebaute Sprachsynthese (u. a. Web Speech API), die je nach Gerät auf Engines von Google (Android/Chrome) oder Apple (iOS/Safari) zurückgreift. Der dafür verarbeitete Text (die vorzulesenden App-Inhalte) wird von der jeweiligen OS-/Browser-Engine verarbeitet; eine gesonderte Übermittlung an uns oder an Dritte findet über diese Funktion hinaus nicht statt.</p>
+
+    <h3>5.11 Internes Projekt- &amp; Support-Tool</h3>
+    <span class="badge">Art. 6 (1) f DSGVO</span>
+    <p>Für interne Aufgaben- und Support-Verwaltung setzen wir ClickUp ein. ClickUp hat im Rahmen dieser internen Nutzung API-Zugriff und wird daher vorsorglich als Auftragsverarbeiter benannt, auch wenn hierüber keine unmittelbare Verarbeitung Ihrer Nutzerdaten aus der App erfolgt.</p>
   </div>
 
   <div class="panel" id="empfaenger">
@@ -265,6 +274,8 @@
         <tr><td><b>Anthropic, PBC</b></td><td>KI-Funktionen (Textgenerierung)</td><td>Von Ihnen eingegebene Inhalte in KI-Funktionen</td></tr>
         <tr><td><b>Resend</b></td><td>Versand von Transaktions-E-Mails</td><td>E-Mail-Adresse, E-Mail-Inhalt (System-E-Mails)</td></tr>
         <tr><td><b>HubSpot, Inc.</b></td><td>CRM (interne Verwaltung)</td><td>Kontakt- und Anfragedaten</td></tr>
+        <tr><td><b>Google LLC / Apple Inc.</b></td><td>Sprachausgabe (Text-to-Speech, Web Speech API bzw. OS-Engine)</td><td>Vorzulesender App-Text, geräteseitig verarbeitet</td></tr>
+        <tr><td><b>ClickUp, Inc.</b></td><td>Internes Projekt- &amp; Support-Tool (API-Zugriff)</td><td>Grundsätzlich keine direkte App-Nutzerdaten; vorsorglich als Auftragsverarbeiter benannt</td></tr>
       </tbody>
     </table>
     <p>Mit allen Anbietern, die als Auftragsverarbeiter tätig werden, bestehen bzw. gelten die jeweils erforderlichen Vereinbarungen zur Auftragsverarbeitung (Art. 28 DSGVO) oder die entsprechenden Standardvertragsbedingungen des Anbieters.</p>
@@ -291,12 +302,28 @@
   <div class="panel" id="speicherdauer">
     <h2>9. Speicherdauer &amp; Löschung</h2>
     <p>Wir speichern personenbezogene Daten nur so lange, wie es für die jeweiligen Zwecke erforderlich ist oder gesetzliche Aufbewahrungsfristen (insbesondere handels- und steuerrechtlicher Art bei Zahlungsdaten) dies verlangen.</p>
+
+    <h3>9.1 Selbstlöschung in der App</h3>
+    <p>Sie können Ihr langsi-Konto direkt in der App selbst löschen: <b>Profil → Account-Informationen → Konto löschen</b>. Dabei werden unmittelbar folgende Daten gelöscht:</p>
     <ul>
-      <li><b>Kontolöschung:</b> Eine Selbstlöschung des Kontos in der App ist aktuell nicht verfügbar. Wenn Sie Ihr langsi-Konto und die damit verbundenen Daten löschen möchten, kontaktieren Sie uns unter info@data-informed-decisions.com. Wir bearbeiten Löschanfragen zeitnah, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</li>
-      <li><b>Zahlungsdaten:</b> Rechnungs- und abrechnungsrelevante Daten werden entsprechend der gesetzlichen Aufbewahrungsfristen (i. d. R. mehrere Jahre) auch nach einer Kontolöschung vorgehalten.</li>
-      <li><b>Nutzungs- und Geräte-Logs:</b> Werden in der Regel nur für einen begrenzten Zeitraum zu Sicherheits- und Fehleranalysezwecken vorgehalten und danach automatisch gelöscht oder anonymisiert.</li>
+      <li><b>UserSettings</b> — Ihre Konto- und Einstellungsdaten,</li>
+      <li><b>UserProgress</b> — Ihr Lern-/Nutzungsfortschritt in der App,</li>
+      <li><b>DailySession</b> — Ihre täglichen Sitzungsdaten.</li>
     </ul>
-    <p>Wir arbeiten daran, künftig eine Selbstlöschfunktion direkt in den App-Einstellungen anzubieten. Diese Erklärung wird zu gegebener Zeit entsprechend aktualisiert.</p>
+    <p>Folgende Daten werden durch die In-App-Selbstlöschung <b>nicht</b> automatisch entfernt und erfordern ggf. eine gesonderte Anfrage bzw. unterliegen eigenen Aufbewahrungspflichten:</p>
+    <ul>
+      <li><b>Favoriten</b> (gespeicherte Inhalte/Merklisten),</li>
+      <li><b>Push-Tokens</b> (Geräte-Token für Benachrichtigungen bei Firebase Cloud Messaging),</li>
+      <li><b>Stripe-/Abonnementdaten</b> (Zahlungs-, Rechnungs- und Vertragsdaten bei Stripe bzw. in unserem Backend, siehe Abschnitt 5.4) — diese werden aus abrechnungs- und steuerrechtlichen Gründen entsprechend der gesetzlichen Aufbewahrungsfristen weiter vorgehalten,</li>
+      <li><b>das Nutzerkonto selbst</b> (Basis-Kontoeintrag, z. B. zur eindeutigen Zuordnung bei laufenden oder vergangenen Vertragsverhältnissen).</li>
+    </ul>
+    <p>Wenn Sie zusätzlich die vollständige Löschung Ihres Nutzerkontos, Ihrer Favoriten, Push-Tokens oder Ihrer bei Stripe hinterlegten Daten wünschen, kontaktieren Sie uns unter info@data-informed-decisions.com. Wir bearbeiten solche Anfragen zeitnah, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+
+    <h3>9.2 Weitere Aufbewahrungsfristen</h3>
+    <ul>
+      <li><b>Zahlungsdaten:</b> Rechnungs- und abrechnungsrelevante Daten werden entsprechend der gesetzlichen Aufbewahrungsfristen (i. d. R. mehrere Jahre) auch nach einer Konto- bzw. Datenlöschung vorgehalten.</li>
+      <li><b>Nutzungs- und Gerätedaten:</b> Werden in der Regel nur für einen begrenzten Zeitraum zu Sicherheits- und Betriebszwecken vorgehalten und danach automatisch gelöscht oder anonymisiert.</li>
+    </ul>
   </div>
 
   <div class="panel" id="kinder">
