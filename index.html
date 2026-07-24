@@ -1,635 +1,447 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="description" content="Data Informed Decisions LLC — Tracking, automation, analysis and reporting. One head, a curated partner network, zero agency overhead."/>
-<title>Data Informed Decisions LLC</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Data Informed Decisions LLC — Your data knows the answer</title>
+<meta name="description" content="Data Informed Decisions LLC turns signal into clarity — tracking, automation, analysis, and reporting. Fully digital. No fluff." />
+<link rel="icon" href="https://data-informed-decisions.com/logo_did.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
-/* ─── TOKENS ─────────────────────────────────────────────────── */
-:root{
-  --bg:#EDF2EA;
-  --ink:#14201A;
-  --ink-80:rgba(20,32,26,.82);
-  --ink-60:rgba(20,32,26,.62);
-  --ink-40:rgba(20,32,26,.40);
-  --ink-20:rgba(20,32,26,.20);
+  :root{
+    --bg-1: #EEEEF3;
+    --bg-2: #F2F5EE;
+    --paper: #F4F4F1;
+    --ink: #14181A;
+    --ink-soft: #3C444A;
+    --muted: #616B72;
+    --forest: #176B44;
+    --forest-soft: #E4F0EA;
+    --coral: #E2572C;
+    --coral-soft: #FBE3DA;
+    --glass-bg: rgba(255,255,255,0.55);
+    --glass-bg-strong: rgba(255,255,255,0.68);
+    --glass-border: rgba(255,255,255,0.7);
+    --line: rgba(20,24,26,0.10);
+    --shadow: 0 30px 80px -30px rgba(20,40,32,0.28), 0 8px 24px -12px rgba(20,40,32,0.12);
+    --radius-xl: 32px;
+    --radius-lg: 26px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+    --font-head: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+    --ease: cubic-bezier(0.2, 0, 0.1, 1);
+    --blob-a: #A9E4CF;
+    --blob-b: #F3B7A2;
+    --blob-c: #86C4D4;
+    --blob-d: #C9E6A9;
+  }
 
-  --glass:rgba(255,255,255,.48);
-  --glass-hi:rgba(255,255,255,.72);
-  --glass-b:rgba(255,255,255,.70);
-  --hairline:rgba(20,32,26,.08);
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin: 0;
+    background: linear-gradient(155deg, var(--bg-1) 0%, var(--bg-2) 55%, var(--paper) 100%);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{ font-family: var(--font-head); margin: 0; letter-spacing: -0.02em; }
+  p{ margin: 0; }
+  a{ color: inherit; }
+  ::selection{ background: var(--forest); color: #fff; }
 
-  --green:#176B44;
-  --green-d:#0F4E32;
-  --green-s:rgba(23,107,68,.12);
-  --coral:#E2572C;
+  .mono{ font-family: var(--font-mono); }
 
-  --blur:blur(26px) saturate(180%);
-  --sh-glass:0 24px 60px rgba(20,32,26,.10),0 1px 0 rgba(255,255,255,.75) inset;
-  --sh-sm:0 6px 18px rgba(20,32,26,.08);
-  --focus:0 0 0 3px rgba(23,107,68,.30);
+  /* ---------- Background blobs ---------- */
+  .blob-field{ position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+  .blob{ position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; will-change: transform; }
+  .blob-a{ width: 620px; height: 620px; background: var(--blob-a); top: -180px; left: -160px; }
+  .blob-b{ width: 520px; height: 520px; background: var(--blob-b); top: 30vh; right: -180px; }
+  .blob-c{ width: 560px; height: 560px; background: var(--blob-c); top: 90vh; left: -220px; }
+  .blob-d{ width: 460px; height: 460px; background: var(--blob-d); top: 160vh; right: -140px; }
 
-  --r-pill:999px;
-  --r-lg:28px;
-  --r-md:18px;
-  --r-sm:12px;
-  --max:1140px;
+  /* ---------- Scroll progress line ---------- */
+  .progress-rail{
+    position: fixed; left: 28px; top: 50%; transform: translateY(-50%);
+    width: 2px; height: 220px; background: rgba(20,24,26,0.08); z-index: 60; border-radius: 2px;
+    display: none;
+  }
+  .progress-fill{ width: 100%; height: 0%; background: var(--forest); border-radius: 2px; transition: height 0.1s linear; }
+  @media (min-width: 1100px){ .progress-rail{ display: block; } }
 
-  --font-d:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
-  --font-b:"Inter",ui-sans-serif,system-ui,-apple-system,sans-serif;
-  --font-m:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-}
+  /* ---------- Nav ---------- */
+  .nav-wrap{ position: fixed; top: 18px; left: 0; right: 0; z-index: 50; display: flex; flex-direction: column; align-items: center; gap: 6px; pointer-events: none; }
+  .nav-pill{
+    pointer-events: auto;
+    display: flex; align-items: center; gap: 22px;
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    backdrop-filter: blur(28px) saturate(180%);
+    border-radius: 999px;
+    padding: 10px 18px 10px 14px;
+    box-shadow: var(--shadow);
+    max-width: calc(100vw - 32px);
+  }
+  .nav-logo{ display: flex; align-items: center; gap: 8px; font-family: var(--font-head); font-weight: 600; font-size: 15px; white-space: nowrap; }
+  .nav-logo img{ height: 24px; width: 24px; object-fit: contain; border-radius: 6px; }
+  .nav-links{ display: none; align-items: center; gap: 18px; font-size: 13.5px; font-weight: 500; }
+  .nav-links a{ text-decoration: none; color: var(--ink-soft); transition: color 0.2s ease; }
+  .nav-links a:hover{ color: var(--forest); }
+  @media (min-width: 900px){ .nav-links{ display: flex; } }
+  .nav-cta{
+    text-decoration: none; font-size: 13px; font-weight: 600; color: #fff;
+    background: var(--forest); padding: 8px 16px; border-radius: 999px; white-space: nowrap;
+  }
+  .chapter-indicator{
+    pointer-events: none;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0; transform: translateY(-4px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .chapter-indicator.show{ opacity: 1; transform: translateY(0); }
 
-/* ─── RESET ──────────────────────────────────────────────────── */
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--ink);font-family:var(--font-b);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-img{max-width:100%;display:block;}
-a{color:inherit;text-decoration:none;}
-h1,h2,h3,h4{font-family:var(--font-d);font-weight:600;letter-spacing:-.01em;color:var(--ink);}
-a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:none;box-shadow:var(--focus);border-radius:8px;}
-::selection{background:var(--green-s);color:var(--green-d);}
+  /* ---------- Section shell ---------- */
+  section{ position: relative; z-index: 1; padding: 120px 24px; }
+  .wrap{ max-width: 1180px; margin: 0 auto; }
+  .kicker{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--forest); margin-bottom: 18px;
+  }
+  .kicker::before{ content: ""; width: 18px; height: 2px; background: var(--forest); display: inline-block; }
+  h2.headline{ font-size: clamp(32px, 5vw, 58px); font-weight: 700; max-width: 16ch; }
+  .lede{ font-size: clamp(16px, 1.6vw, 19px); color: var(--ink-soft); max-width: 56ch; margin-top: 22px; }
 
-/* ─── LANGUAGE ───────────────────────────────────────────────── */
-/* .lang-de starts with [hidden] in HTML; JS toggles both */
+  /* ---------- Glass panel ---------- */
+  .glass{
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    backdrop-filter: blur(28px) saturate(180%);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow);
+  }
 
-/* ─── LAYOUT ─────────────────────────────────────────────────── */
-.wrap{width:min(var(--max),92vw);margin:0 auto;}
+  /* ---------- Reveal system ---------- */
+  .reveal{ opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s var(--ease); }
+  .reveal.in-view{ opacity: 1; transform: translateY(0); }
+  .stagger > *{ transition-delay: 0ms; }
+  .stagger > *:nth-child(1){ transition-delay: 0ms; }
+  .stagger > *:nth-child(2){ transition-delay: 80ms; }
+  .stagger > *:nth-child(3){ transition-delay: 160ms; }
+  .stagger > *:nth-child(4){ transition-delay: 240ms; }
+  .stagger > *:nth-child(5){ transition-delay: 320ms; }
 
-/* ─── BACKGROUND BLOBS ───────────────────────────────────────── */
-.bg{position:fixed;inset:0;z-index:-1;pointer-events:none;}
-.bg-b{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;}
-.b1{width:900px;height:700px;top:-10%;left:-15%;background:radial-gradient(ellipse,rgba(80,200,140,.55),transparent 70%);}
-.b2{width:700px;height:600px;top:-5%;right:-12%;background:radial-gradient(ellipse,rgba(226,87,44,.28),transparent 70%);}
-.b3{width:800px;height:650px;bottom:-20%;left:30%;background:radial-gradient(ellipse,rgba(60,140,210,.22),transparent 70%);}
-.b4{width:600px;height:500px;bottom:10%;right:-10%;background:radial-gradient(ellipse,rgba(80,200,140,.20),transparent 70%);}
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    .reveal{ opacity: 1 !important; transform: none !important; transition: none !important; }
+    .blob{ transition: none !important; }
+    * { animation: none !important; }
+  }
 
-/* ─── SCROLL PROGRESS ────────────────────────────────────────── */
-.sp{position:fixed;left:0;top:0;width:3px;height:0%;background:var(--green);z-index:100;transition:height .1s linear;}
+  /* =====================================================
+     CHAPTER 0 — HERO
+  ===================================================== */
+  #hero{
+    min-height: 100vh; display: flex; align-items: center; padding-top: 140px; padding-bottom: 60px;
+  }
+  .hero-grid{ display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+  @media (min-width: 980px){ .hero-grid{ grid-template-columns: 1.05fr 0.95fr; gap: 24px; } }
+  .hero-head{ font-size: clamp(38px, 6.4vw, 72px); font-weight: 700; line-height: 1.04; }
+  .hero-head .line2{ color: var(--forest); }
+  .hero-sub{ font-size: clamp(16px, 1.7vw, 19px); color: var(--ink-soft); max-width: 46ch; margin-top: 26px; }
+  .hero-cta{
+    margin-top: 36px; display: inline-flex; align-items: center; gap: 10px;
+    background: var(--forest); color: #fff; text-decoration: none;
+    padding: 15px 26px; border-radius: 999px; font-weight: 600; font-size: 15px;
+    box-shadow: 0 18px 40px -14px rgba(23,107,68,0.55);
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  }
+  .hero-cta:hover{ transform: translateY(-2px); box-shadow: 0 22px 46px -12px rgba(23,107,68,0.6); }
+  .hero-visual{ position: relative; width: 100%; aspect-ratio: 1 / 1; max-width: 560px; margin: 0 auto; }
+  .hero-visual svg{ width: 100%; height: 100%; }
+  .dot{ transition: transform 1.1s cubic-bezier(0.2,0,0.1,1); }
+  @keyframes jitter{
+    0%,100%{ transform: translate(0,0); }
+    25%{ transform: translate(0.6px,-0.7px); }
+    50%{ transform: translate(-0.5px,0.6px); }
+    75%{ transform: translate(0.5px,0.4px); }
+  }
+  .dot-jitter{ animation: jitter 3.4s ease-in-out infinite; transform-origin: center; }
 
-/* ─── GLASS MIXIN ────────────────────────────────────────────── */
-.glass{background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--r-lg);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--sh-glass);}
-.glass-hi{background:var(--glass-hi);}
+  /* =====================================================
+     CHAPTER 1 — THE PROBLEM
+  ===================================================== */
+  .wave-panel{ padding: 44px; margin-top: 48px; }
+  .wave-panel svg{ width: 100%; height: auto; display: block; }
+  .wave-path{ fill: none; stroke-linecap: round; stroke-width: 2.4; }
+  .terminal-lines{ margin-top: 30px; display: flex; flex-direction: column; gap: 8px; }
+  .term-line{
+    font-family: var(--font-mono); font-size: 14.5px; color: var(--forest);
+    white-space: nowrap; overflow: hidden; width: 0; border-right: 2px solid var(--forest);
+  }
+  .term-line.type{ animation: typeIn 1.1s steps(30, end) forwards, caretBlink 0.9s step-end infinite; }
+  .term-line:nth-child(1).type{ animation-delay: 0.1s, 0.1s; }
+  .term-line:nth-child(2).type{ animation-delay: 0.9s, 0.9s; }
+  .term-line:nth-child(3).type{ animation-delay: 1.7s, 1.7s; }
+  @keyframes typeIn{ from{ width: 0; } to{ width: 34ch; } }
+  @keyframes caretBlink{ 50%{ border-color: transparent; } }
 
-/* ─── HEADER ─────────────────────────────────────────────────── */
-header{position:sticky;top:0;z-index:40;padding:12px 0 0;}
-.pill-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:8px 8px 8px 14px;border-radius:var(--r-pill);
-  background:var(--glass-hi);border:1px solid var(--glass-b);
-  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--sh-sm);}
-.brand{display:flex;align-items:center;gap:10px;min-width:0;flex-shrink:0;}
-.brand img{width:34px;height:34px;border-radius:9px;flex-shrink:0;}
-.brand-text b{font-family:var(--font-d);font-size:14px;font-weight:600;display:block;line-height:1.2;}
-.brand-text span{font-family:var(--font-m);font-size:10px;color:var(--ink-40);display:none;}
-@media(min-width:560px){.brand-text span{display:block;}}
-.nav-links{display:none;gap:4px;overflow-x:auto;scrollbar-width:none;}
-.nav-links::-webkit-scrollbar{display:none;}
-.nav-links a{flex-shrink:0;font-size:12.5px;padding:7px 13px;border-radius:var(--r-pill);border:1px solid var(--hairline);color:var(--ink-80);white-space:nowrap;transition:background .15s;}
-.nav-links a:hover{background:rgba(255,255,255,.5);}
-@media(min-width:900px){.nav-links{display:flex;}}
-.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-.lang-toggle{display:flex;border-radius:var(--r-pill);border:1px solid var(--hairline);overflow:hidden;background:rgba(255,255,255,.35);}
-.lang-toggle button{font-family:var(--font-m);font-size:11px;font-weight:500;padding:6px 10px;border:none;background:transparent;cursor:pointer;color:var(--ink-60);transition:background .15s,color .15s;}
-.lang-toggle button.active{background:var(--green);color:#fff;}
-.subnav{display:flex;gap:6px;overflow-x:auto;padding:8px 0 12px;scrollbar-width:none;}
-.subnav::-webkit-scrollbar{display:none;}
-.subnav a{flex-shrink:0;font-size:12px;padding:6px 13px;border-radius:var(--r-pill);border:1px solid var(--glass-b);background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);color:var(--ink-80);white-space:nowrap;}
-@media(min-width:900px){.subnav{display:none;}}
+  /* =====================================================
+     CHAPTER 2 — THE PROCESS
+  ===================================================== */
+  .process-track{ position: relative; margin-top: 64px; }
+  .process-line{
+    position: absolute; left: 34px; top: 0; bottom: 0; width: 2px;
+    background: repeating-linear-gradient(to bottom, rgba(23,107,68,0.18) 0 6px, transparent 6px 12px);
+    z-index: 0;
+  }
+  .process-line-fill{
+    position: absolute; left: 0; top: 0; width: 100%; height: 0%;
+    background: var(--forest); transition: height 1.2s var(--ease);
+  }
+  .process-steps{ display: flex; flex-direction: column; gap: 28px; position: relative; z-index: 1; }
+  .process-card{
+    padding: 34px 36px; display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: center;
+  }
+  .process-card:nth-child(2){ margin-left: 4%; }
+  .process-card:nth-child(3){ margin-left: 8%; }
+  @media (max-width: 720px){ .process-card{ grid-template-columns: 1fr; margin-left: 0 !important; } }
+  .process-num{ font-family: var(--font-mono); font-size: 40px; font-weight: 600; color: var(--forest); line-height: 1; }
+  .process-icon{ margin-top: 14px; }
+  .process-title{ font-family: var(--font-head); font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+  .process-desc{ color: var(--ink-soft); font-size: 15.5px; max-width: 46ch; }
 
-/* ─── BUTTONS ────────────────────────────────────────────────── */
-.btn{cursor:pointer;appearance:none;border-radius:var(--r-pill);padding:13px 22px;border:1px solid var(--glass-b);background:var(--glass-hi);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);color:var(--ink);font-family:var(--font-b);font-weight:600;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s ease,box-shadow .12s ease;}
-.btn:hover{transform:translateY(-1px);box-shadow:var(--sh-sm);}
-.btn:disabled{opacity:.55;cursor:not-allowed;transform:none!important;}
-.btn-p{background:var(--green);border-color:var(--green);color:#fff;}
-.btn-p:hover{background:var(--green-d);border-color:var(--green-d);}
-.btn-sm{padding:8px 16px;font-size:13px;}
-.btn-block{width:100%;}
+  /* =====================================================
+     CHAPTER 3 — THE OUTCOME
+  ===================================================== */
+  .signal-panel{ padding: 40px; margin-top: 50px; overflow: hidden; }
+  .signal-panel svg{ width: 100%; height: auto; display: block; }
+  .signal-draw{ fill: none; stroke: var(--forest); stroke-width: 3; stroke-linecap: round; }
+  .signal-dot{ fill: #b9c2be; }
+  .pulse-ring{ fill: none; stroke: var(--coral); stroke-width: 2; opacity: 0; }
+  .pulse-ring.go{ animation: pulseRing 1.8s ease-out 1; animation-delay: 1.6s; }
+  @keyframes pulseRing{
+    0%{ opacity: 0.9; r: 10; }
+    100%{ opacity: 0; r: 34; }
+  }
+  .decision-label{
+    margin-top: 18px; display: flex; justify-content: flex-end;
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; color: var(--coral); font-weight: 600;
+  }
 
-/* ─── SECTIONS ───────────────────────────────────────────────── */
-.sxn{padding:14px 0;}
-.panel{padding:32px 24px;}
-@media(min-width:700px){.panel{padding:48px 48px;}}
-.eyebrow{font-family:var(--font-m);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--green-d);margin-bottom:10px;}
-h2{font-size:clamp(24px,4.5vw,36px);line-height:1.1;margin-bottom:10px;}
-.sub-p{color:var(--ink-60);font-size:15px;line-height:1.65;max-width:62ch;margin-top:12px;}
+  /* =====================================================
+     CHAPTER 4 — SERVICES
+  ===================================================== */
+  .service-row{
+    display: grid; grid-template-columns: 60px 1fr auto; align-items: center; gap: 24px;
+    padding: 30px 8px; border-bottom: 1px solid var(--line);
+  }
+  .service-row:last-child{ border-bottom: none; }
+  .service-num{ font-family: var(--font-mono); color: var(--forest); font-size: 15px; font-weight: 600; }
+  .service-title{ font-family: var(--font-head); font-size: clamp(19px, 2.4vw, 26px); font-weight: 600; margin-bottom: 6px; }
+  .service-desc{ color: var(--ink-soft); font-size: 15px; max-width: 52ch; }
+  .service-svg{ width: 84px; height: 46px; flex-shrink: 0; }
+  @media (max-width: 720px){
+    .service-row{ grid-template-columns: 1fr; text-align: left; }
+    .service-svg{ margin-top: 12px; }
+  }
 
-/* ─── HERO ───────────────────────────────────────────────────── */
-#hero{padding:16px 0 0;}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:14px;}
-@media(min-width:920px){.hero-grid{grid-template-columns:1.35fr .65fr;align-items:stretch;}}
-.hero-main{padding:36px 28px;display:flex;flex-direction:column;gap:0;}
-h1{font-size:clamp(30px,6.5vw,54px);line-height:1.05;font-weight:700;}
-h1 .acc{color:var(--green);}
-.hero-sub{color:var(--ink-60);font-size:16px;line-height:1.65;max-width:54ch;margin-top:18px;}
-.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
-.hero-tags{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
-.hero-tags li{font-size:12.5px;color:var(--ink-60);padding:6px 13px;border-radius:var(--r-pill);background:rgba(255,255,255,.45);border:1px solid var(--glass-b);}
+  /* =====================================================
+     CHAPTER 5 — STACK
+  ===================================================== */
+  .chips{ display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+  .chip{
+    font-family: var(--font-mono); font-size: 13px; padding: 9px 16px; border-radius: 999px;
+    background: var(--forest-soft); color: var(--forest); border: 1px solid rgba(23,107,68,0.16);
+  }
+  .stack-note{ margin-top: 30px; color: var(--ink-soft); font-size: 15.5px; max-width: 60ch; }
 
-/* ─── FOUNDER PANE ───────────────────────────────────────────── */
-.founder-pane{padding:28px;display:flex;flex-direction:column;gap:16px;justify-content:space-between;}
-.founder-top{display:flex;align-items:center;gap:14px;}
-.f-photo{flex-shrink:0;width:68px;height:68px;border-radius:16px;background:var(--green-s) url("https://data-informed-decisions.com/did_variant_03_lineart.png") center/cover;border:1px solid var(--glass-b);}
-.f-name{font-family:var(--font-d);font-weight:600;font-size:17px;}
-.f-role{font-size:12.5px;color:var(--ink-60);margin-top:3px;line-height:1.45;}
-.f-quote{font-size:14.5px;color:var(--ink-80);line-height:1.6;font-style:italic;}
-.f-meta{font-size:13px;color:var(--ink-60);line-height:1.65;padding-top:14px;border-top:1px solid var(--hairline);}
-.f-meta b{color:var(--ink);font-weight:600;}
+  /* =====================================================
+     CHAPTER 6 — PRICING
+  ===================================================== */
+  .pricing-grid{ display: grid; grid-template-columns: 1fr; gap: 22px; margin-top: 48px; }
+  @media (min-width: 860px){ .pricing-grid{ grid-template-columns: repeat(3, 1fr); } }
+  .price-card{ padding: 36px 30px; display: flex; flex-direction: column; gap: 14px; }
+  .price-card:nth-child(2){ transform: translateY(-10px); }
+  @media (max-width: 859px){ .price-card:nth-child(2){ transform: none; } }
+  .price-tag{ font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .price-title{ font-family: var(--font-head); font-size: 24px; font-weight: 600; }
+  .price-value{ font-family: var(--font-mono); font-size: 15px; color: var(--forest); font-weight: 600; }
+  .price-list{ list-style: none; margin: 10px 0 0; padding: 0; color: var(--ink-soft); font-size: 14.5px; display: flex; flex-direction: column; gap: 6px; }
+  .price-list li::before{ content: "— "; color: var(--forest); }
 
-/* ─── HERO SVG ───────────────────────────────────────────────── */
-.hero-vis{margin-top:22px;padding:18px 14px 14px;background:rgba(255,255,255,.32);border-radius:var(--r-md);border:1px solid rgba(255,255,255,.5);}
-.vis-cap{display:flex;justify-content:space-between;font-family:var(--font-m);font-size:10.5px;color:var(--ink-40);margin-bottom:6px;}
-.hero-svg{width:100%;height:auto;display:block;}
-.hero-svg .gl{stroke:var(--hairline);stroke-width:1;}
-.hero-svg .nd{fill:var(--ink-40);opacity:0;animation:fi .5s ease-out forwards;}
-.hero-svg .trend{fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-dasharray:480;stroke-dashoffset:480;animation:draw 1.8s .3s cubic-bezier(.4,0,.2,1) forwards;}
-.hero-svg .dec{fill:var(--coral);opacity:0;animation:pop .5s 1.8s ease-out forwards;}
-.hero-svg .decring{fill:none;stroke:var(--coral);stroke-width:1.5;opacity:0;animation:ring 1.4s 1.85s ease-out forwards;}
-@keyframes draw{to{stroke-dashoffset:0;}}
-@keyframes pop{from{opacity:0;transform:scale(.2);}to{opacity:1;transform:scale(1);}}
-@keyframes fi{to{opacity:.5;}}
-@keyframes ring{0%{opacity:.8;r:6;}100%{opacity:0;r:20;}}
+  /* =====================================================
+     CHAPTER 7 — POLICIES
+  ===================================================== */
+  .policy-panel{ padding: 40px; margin-top: 44px; }
+  .policy-grid{ display: grid; grid-template-columns: 1fr; gap: 30px; }
+  @media (min-width: 780px){ .policy-grid{ grid-template-columns: repeat(3, 1fr); } }
+  .policy-title{ font-family: var(--font-head); font-weight: 600; font-size: 17px; margin-bottom: 8px; color: var(--forest); }
+  .policy-text{ color: var(--ink-soft); font-size: 14.5px; }
 
-/* ─── PROBLEM SECTION ────────────────────────────────────────── */
-.problem-grid{display:grid;gap:14px;grid-template-columns:1fr;}
-@media(min-width:820px){.problem-grid{grid-template-columns:1.1fr .9fr;align-items:start;}}
-.problem-copy{padding:36px 28px;}
-.problem-vis{padding:24px;}
-.chaos-svg{width:100%;height:auto;display:block;}
-.chaos-svg .cw{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.7;}
-.cw1{stroke:#176B44;}
-.cw2{stroke:#E2572C;}
-.cw3{stroke:var(--ink-40);}
-.cw4{stroke:rgba(60,140,210,.6);}
-.chaos-svg .cw{stroke-dasharray:600;stroke-dashoffset:600;}
-.chaos-reveal .cw{animation:draw 2s ease-out forwards;}
-.chaos-reveal .cw1{animation-delay:.0s;}
-.chaos-reveal .cw2{animation-delay:.3s;}
-.chaos-reveal .cw3{animation-delay:.6s;}
-.chaos-reveal .cw4{animation-delay:.9s;}
-.code-block{margin-top:20px;font-family:var(--font-m);font-size:13px;color:var(--ink-60);line-height:1.8;border-left:2px solid var(--green-s);padding-left:14px;}
-.code-block .c-comment{color:var(--ink-40);}
-.code-block .c-val{color:var(--coral);}
+  /* =====================================================
+     CHAPTER 8 — CONTACT
+  ===================================================== */
+  .contact-grid{ display: grid; grid-template-columns: 1fr; gap: 26px; margin-top: 48px; }
+  @media (min-width: 900px){ .contact-grid{ grid-template-columns: 0.9fr 1.1fr; } }
+  .contact-panel{ padding: 38px; }
+  .contact-item{ margin-bottom: 20px; }
+  .contact-label{ font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .contact-value{ font-size: 16px; font-weight: 500; }
+  .copy-row{ display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+  .copy-btn{
+    font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--line); background: #fff;
+    padding: 6px 12px; border-radius: 999px; cursor: pointer; color: var(--forest);
+    transition: background 0.2s ease;
+  }
+  .copy-btn:hover{ background: var(--forest-soft); }
+  .form-field{ margin-bottom: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .form-field label{ font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.05em; color: var(--muted); }
+  .form-field input, .form-field textarea{
+    font-family: var(--font-body); font-size: 15px; padding: 12px 14px; border-radius: var(--radius-sm);
+    border: 1px solid var(--line); background: rgba(255,255,255,0.7); resize: vertical; outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .form-field input:focus, .form-field textarea:focus{ border-color: var(--forest); box-shadow: 0 0 0 3px rgba(23,107,68,0.14); }
+  .honeypot{ position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+  .submit-btn{
+    font-family: var(--font-head); font-weight: 600; font-size: 15px; color: #fff; background: var(--forest);
+    border: none; padding: 14px 24px; border-radius: 999px; cursor: pointer; width: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .submit-btn:hover{ transform: translateY(-1px); box-shadow: 0 16px 32px -14px rgba(23,107,68,0.5); }
+  .form-note{ font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+  .form-status{ font-size: 13px; margin-top: 10px; min-height: 18px; color: var(--forest); }
 
-/* ─── DIFFERENTIATOR ─────────────────────────────────────────── */
-.diff-panel{padding:40px 28px;}
-@media(min-width:700px){.diff-panel{padding:56px 56px;}}
-.diff-grid{display:grid;gap:14px;grid-template-columns:1fr;margin-top:28px;}
-@media(min-width:820px){.diff-grid{grid-template-columns:1fr 1fr;}}
-.diff-card{background:rgba(255,255,255,.35);border:1px solid var(--glass-b);border-radius:var(--r-md);padding:24px;}
-.diff-card .dc-icon{font-size:28px;margin-bottom:12px;}
-.diff-card h3{font-size:16px;margin-bottom:8px;}
-.diff-card p{font-size:13.5px;color:var(--ink-60);line-height:1.6;}
-
-/* ─── PARTNER NETWORK ────────────────────────────────────────── */
-.net-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px;}
-@media(min-width:600px){.net-grid{grid-template-columns:repeat(3,1fr);}}
-@media(min-width:900px){.net-grid{grid-template-columns:repeat(6,1fr);}}
-.net-card{background:rgba(255,255,255,.38);border:1px solid var(--glass-b);border-radius:var(--r-md);padding:18px 14px;text-align:center;}
-.net-card .nc-icon{font-size:24px;margin-bottom:8px;}
-.net-card .nc-title{font-family:var(--font-d);font-size:13px;font-weight:600;margin-bottom:4px;}
-.net-card .nc-sub{font-size:11.5px;color:var(--ink-60);line-height:1.45;}
-
-/* ─── PROCESS ────────────────────────────────────────────────── */
-.process-steps{display:flex;flex-direction:column;gap:0;margin-top:28px;position:relative;}
-.process-steps::before{content:'';position:absolute;left:22px;top:28px;bottom:28px;width:2px;background:linear-gradient(to bottom,var(--green),var(--green-s));border-radius:1px;}
-@media(min-width:700px){.process-steps{flex-direction:row;gap:0;}
-.process-steps::before{top:22px;left:28px;right:28px;bottom:auto;width:auto;height:2px;background:linear-gradient(to right,var(--green),var(--green-s));}}
-.ps{display:flex;gap:18px;flex:1;position:relative;padding:0 0 28px 0;}
-.ps:last-child{padding-bottom:0;}
-@media(min-width:700px){.ps{flex-direction:column;gap:14px;padding:0 24px 0 0;align-items:flex-start;}
-.ps:last-child{padding-right:0;}}
-.ps-num{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;font-family:var(--font-m);font-size:15px;font-weight:500;display:flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 0 0 6px var(--bg);}
-.ps-body{}
-.ps h3{font-size:15px;margin-bottom:7px;}
-.ps p{font-size:13.5px;color:var(--ink-60);line-height:1.6;}
-.ps .ps-note{margin-top:8px;font-family:var(--font-m);font-size:12px;color:var(--green);padding:5px 10px;background:var(--green-s);border-radius:6px;display:inline-block;}
-
-/* ─── SERVICES ───────────────────────────────────────────────── */
-.svc-list{display:flex;flex-direction:column;gap:12px;margin-top:24px;}
-.svc{display:grid;grid-template-columns:52px 1fr;gap:18px;align-items:start;background:rgba(255,255,255,.38);border:1px solid var(--glass-b);border-radius:var(--r-md);padding:22px 20px;}
-@media(min-width:700px){.svc{grid-template-columns:64px 1fr 1fr;}}
-.svc-num{font-family:var(--font-m);font-size:20px;font-weight:500;color:var(--green);line-height:1;}
-.svc h3{font-size:16px;margin-bottom:8px;}
-.svc p{font-size:13.5px;color:var(--ink-60);line-height:1.6;}
-.svc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
-.svc-tag{font-family:var(--font-m);font-size:11px;padding:4px 9px;border-radius:999px;background:var(--green-s);color:var(--green-d);border:1px solid rgba(23,107,68,.15);}
-
-/* ─── STACK ──────────────────────────────────────────────────── */
-.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px;}
-.chip{font-family:var(--font-m);font-size:12px;padding:8px 14px;border-radius:var(--r-pill);background:var(--green-s);color:var(--green-d);border:1px solid rgba(23,107,68,.15);}
-
-/* ─── PRICING ────────────────────────────────────────────────── */
-.pricing-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:24px;}
-@media(min-width:700px){.pricing-grid{grid-template-columns:repeat(3,1fr);}}
-.price-card{background:rgba(255,255,255,.38);border:1px solid var(--glass-b);border-radius:var(--r-md);padding:26px 22px;display:flex;flex-direction:column;gap:10px;}
-.price-card h3{font-size:17px;}
-.price-card .price-sub{font-size:13.5px;color:var(--ink-60);line-height:1.6;}
-.price-card .price-tag{margin-top:auto;font-family:var(--font-m);font-size:12px;padding:7px 12px;background:var(--green-s);color:var(--green-d);border-radius:var(--r-pill);display:inline-flex;align-self:flex-start;}
-
-/* ─── POLICIES ───────────────────────────────────────────────── */
-.pol-grid{display:grid;grid-template-columns:1fr;gap:0;margin-top:24px;}
-.pol-item{padding:20px 0;border-top:1px solid var(--hairline);}
-.pol-item:first-child{border-top:none;padding-top:4px;}
-@media(min-width:700px){.pol-grid{grid-template-columns:1fr 1fr 1fr;gap:28px;}
-.pol-item{border-top:none;border-left:1px solid var(--hairline);padding:4px 0 0 28px;}
-.pol-item:first-child{border-left:none;padding-left:0;}}
-.pol-item h3{font-size:15px;margin-bottom:8px;}
-.pol-item p{font-size:13.5px;color:var(--ink-60);line-height:1.65;}
-
-/* ─── CONTACT ────────────────────────────────────────────────── */
-.contact-grid{display:grid;gap:28px;margin-top:24px;}
-@media(min-width:860px){.contact-grid{grid-template-columns:1fr 1fr;align-items:start;}}
-.contact-copy p{font-size:14px;color:var(--ink-60);line-height:1.65;margin-top:10px;}
-.contact-copy b{color:var(--ink);font-weight:600;}
-.contact-item{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;}
-.kbd{font-family:var(--font-m);font-size:12px;padding:7px 12px;border-radius:var(--r-pill);border:1px solid var(--glass-b);background:rgba(255,255,255,.5);color:var(--ink-80);}
-form{display:grid;gap:12px;}
-label{font-size:12.5px;color:var(--ink-80);font-weight:500;display:block;margin-bottom:5px;}
-input,textarea{width:100%;padding:12px 14px;border-radius:var(--r-sm);border:1px solid var(--glass-b);background:rgba(255,255,255,.55);color:var(--ink);font-family:var(--font-b);font-size:14px;outline:none;transition:background .12s,border-color .12s;}
-input:focus,textarea:focus{background:rgba(255,255,255,.9);border-color:var(--green);}
-input::placeholder,textarea::placeholder{color:var(--ink-40);}
-textarea{min-height:108px;resize:vertical;}
-input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:var(--coral);}
-.row2{display:grid;gap:12px;}
-@media(min-width:540px){.row2{grid-template-columns:1fr 1fr;}}
-.ferr{margin-top:5px;font-size:12px;color:var(--coral);display:none;}
-.ferr.show{display:block;}
-.hint{font-size:12px;color:var(--ink-40);margin-top:4px;}
-
-/* ─── FOOTER ─────────────────────────────────────────────────── */
-footer{padding:28px 0 44px;margin-top:6px;}
-.foot-row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-40);}
-.foot-row b{color:var(--ink-80);}
-.tl{color:var(--ink-60);text-decoration:underline;text-underline-offset:2px;}
-.tl:hover{color:var(--green-d);}
-
-/* ─── REVEAL ANIMATIONS ──────────────────────────────────────── */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,0,.1,1),transform .7s cubic-bezier(.2,0,.1,1);}
-.reveal.in{opacity:1;transform:none;}
-.d1{transition-delay:.08s;}
-.d2{transition-delay:.16s;}
-.d3{transition-delay:.24s;}
-.d4{transition-delay:.32s;}
-.d5{transition-delay:.40s;}
-.d6{transition-delay:.48s;}
-
-/* ─── TOAST ──────────────────────────────────────────────────── */
-.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(8px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:var(--r-pill);font-size:12.5px;box-shadow:var(--sh-sm);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:200;}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
-/* ─── REDUCED MOTION ─────────────────────────────────────────── */
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto;}
-  .reveal{transition:none;}
-  .reveal{opacity:1;transform:none;}
-  .hero-svg .nd,.hero-svg .trend,.hero-svg .dec,.hero-svg .decring{animation:none;opacity:.5;stroke-dashoffset:0;}
-  .hero-svg .dec{opacity:1;}
-  .chaos-svg .cw{animation:none;stroke-dashoffset:0;}
-  .btn{transition:none;}
-}
+  /* ---------- Footer ---------- */
+  footer{ padding: 60px 24px 44px; position: relative; z-index: 1; }
+  .footer-wrap{ max-width: 1180px; margin: 0 auto; text-align: center; color: var(--muted); font-size: 13.5px; }
+  .footer-name{ font-family: var(--font-head); font-weight: 600; color: var(--ink); font-size: 16px; margin-bottom: 6px; }
+  .footer-links{ margin-top: 18px; display: flex; justify-content: center; gap: 18px; }
+  .footer-links a{ text-decoration: none; color: var(--muted); }
+  .footer-links a:hover{ color: var(--forest); }
 </style>
 </head>
 <body>
 
-<!-- BG BLOBS -->
-<div class="bg" aria-hidden="true">
-  <div class="bg-b b1"></div>
-  <div class="bg-b b2"></div>
-  <div class="bg-b b3"></div>
-  <div class="bg-b b4"></div>
+<div class="blob-field" aria-hidden="true">
+  <div class="blob blob-a" data-speed="0.10"></div>
+  <div class="blob blob-b" data-speed="0.14"></div>
+  <div class="blob blob-c" data-speed="0.08"></div>
+  <div class="blob blob-d" data-speed="0.12"></div>
 </div>
 
-<!-- SCROLL PROGRESS -->
-<div class="sp" id="sp" aria-hidden="true"></div>
+<div class="progress-rail" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
 
-<!-- HEADER -->
-<header>
+<div class="nav-wrap">
+  <nav class="nav-pill">
+    <div class="nav-logo">
+      <img src="https://data-informed-decisions.com/logo_did.png" alt="Data Informed Decisions LLC logo" />
+      DID LLC
+    </div>
+    <div class="nav-links">
+      <a href="#problem">The Problem</a>
+      <a href="#process">The Process</a>
+      <a href="#outcome">The Outcome</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">Talk to us</a>
+  </nav>
+  <div class="chapter-indicator mono" id="chapterIndicator">Hero</div>
+</div>
+
+<!-- ================= CHAPTER 0 — HERO ================= -->
+<section id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 class="hero-head reveal in-view">Your data knows<br />the answer.<br /><span class="line2">You just can't hear it yet.</span></h1>
+      <p class="hero-sub reveal in-view" style="transition-delay:120ms;">Data Informed Decisions LLC turns signal into clarity — tracking, automation, analysis, and reporting. Fully digital. No fluff.</p>
+      <a href="#problem" class="hero-cta reveal in-view" style="transition-delay:220ms;">Begin →</a>
+    </div>
+    <div class="hero-visual reveal in-view" style="transition-delay:100ms;">
+      <svg id="heroDots" viewBox="0 0 500 500" aria-hidden="true"></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 1 — THE PROBLEM ================= -->
+<section id="problem" data-chapter="The Problem">
   <div class="wrap">
-    <nav class="pill-nav" aria-label="Primary">
-      <a class="brand" href="#top" aria-label="Home">
-        <img src="https://data-informed-decisions.com/logo_did.png" alt="DID Logo"/>
-        <div class="brand-text">
-          <b>Data Informed Decisions LLC</b>
-          <span>ANALYTICS · TRACKING · AUTOMATION</span>
-        </div>
-      </a>
-      <div class="nav-links" role="list">
-        <a href="#problem"   data-en="The Problem"  data-de="Das Problem">The Problem</a>
-        <a href="#approach"  data-en="Approach"     data-de="Ansatz">Approach</a>
-        <a href="#services"  data-en="Services"     data-de="Leistungen">Services</a>
-        <a href="#network"   data-en="Network"      data-de="Netzwerk">Network</a>
-        <a href="#pricing"   data-en="Pricing"      data-de="Preise">Pricing</a>
-        <a href="#contact"   data-en="Contact"      data-de="Kontakt">Contact</a>
-      </div>
-      <div class="nav-right">
-        <div class="lang-toggle" role="group" aria-label="Language">
-          <button data-lang-btn="en" class="active" onclick="setLang('en')">EN</button>
-          <button data-lang-btn="de" onclick="setLang('de')">DE</button>
-        </div>
-        <a class="btn btn-p btn-sm" href="#contact" data-en="Contact" data-de="Kontakt">Contact</a>
-      </div>
-    </nav>
-    <div class="subnav" aria-label="Sections">
-      <a href="#problem"  data-en="The Problem"  data-de="Das Problem">The Problem</a>
-      <a href="#approach" data-en="Approach"     data-de="Ansatz">Approach</a>
-      <a href="#services" data-en="Services"     data-de="Leistungen">Services</a>
-      <a href="#network"  data-en="Network"      data-de="Netzwerk">Network</a>
-      <a href="#pricing"  data-en="Pricing"      data-de="Preise">Pricing</a>
-      <a href="#contact"  data-en="Contact"      data-de="Kontakt">Contact</a>
-    </div>
-  </div>
-</header>
+    <p class="kicker reveal">Chapter One</p>
+    <h2 class="headline reveal">Most data is just noise.</h2>
+    <p class="lede reveal" style="transition-delay:100ms;">Every system produces data. Most of it is inconsistently named, measured differently across teams, and read by people who distrust the numbers before they even open the dashboard. That's not a data problem. It's a systems problem.</p>
 
-<main id="top">
-
-<!-- ═══ HERO ═══════════════════════════════════════════════════ -->
-<section id="hero" class="wrap">
-  <div class="hero-grid">
-
-    <!-- Main copy -->
-    <div class="glass hero-main">
-      <div>
-        <p class="eyebrow" data-en="Data-driven decisions, without the chaos." data-de="Datengetriebene Entscheidungen — ohne das Chaos.">Data-driven decisions, without the chaos.</p>
-        <div class="lang-en">
-          <h1>Your data knows<br>the answer.<br><span class="acc">You just can't<br>hear it yet.</span></h1>
-        </div>
-        <div class="lang-de" hidden>
-          <h1>Deine Daten kennen<br>die Antwort.<br><span class="acc">Du hörst sie nur<br>noch nicht.</span></h1>
-        </div>
-
-        <div class="lang-en">
-          <p class="hero-sub">Data Informed Decisions LLC turns digital signal into clarity — tracking, automation, analysis, and reporting. One head. A curated partner network. Zero agency overhead.</p>
-        </div>
-        <div class="lang-de" hidden>
-          <p class="hero-sub">Data Informed Decisions LLC verwandelt digitale Signale in Klarheit — Tracking, Automatisierung, Analyse und Reporting. Ein Kopf. Ein kuratiertes Partnernetzwerk. Null Agentur-Overhead.</p>
-        </div>
-
-        <div class="cta-row">
-          <button class="btn btn-p" onclick="scrollTo('problem')" data-en="Begin ↓" data-de="Loslegen ↓">Begin ↓</button>
-          <button class="btn" onclick="scrollTo('services')" data-en="See capabilities" data-de="Leistungen ansehen">See capabilities</button>
-        </div>
-      </div>
-
-      <!-- Signature chart -->
-      <div class="hero-vis" aria-hidden="true">
-        <div class="vis-cap">
-          <span data-en="RAW SIGNAL" data-de="ROHSIGNAL">RAW SIGNAL</span>
-          <span data-en="DECISION" data-de="ENTSCHEIDUNG">DECISION</span>
-        </div>
-        <svg class="hero-svg" viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg">
-          <line class="gl" x1="0" y1="40" x2="640" y2="40"/>
-          <line class="gl" x1="0" y1="80" x2="640" y2="80"/>
-          <line class="gl" x1="0" y1="120" x2="640" y2="120"/>
-          <!-- noise dots -->
-          <circle class="nd" cx="28"  cy="55"  r="3" style="animation-delay:.05s"/>
-          <circle class="nd" cx="62"  cy="108" r="3" style="animation-delay:.10s"/>
-          <circle class="nd" cx="90"  cy="42"  r="3" style="animation-delay:.14s"/>
-          <circle class="nd" cx="120" cy="92"  r="3" style="animation-delay:.18s"/>
-          <circle class="nd" cx="155" cy="122" r="3" style="animation-delay:.22s"/>
-          <circle class="nd" cx="188" cy="68"  r="3" style="animation-delay:.26s"/>
-          <circle class="nd" cx="220" cy="104" r="3" style="animation-delay:.30s"/>
-          <circle class="nd" cx="256" cy="50"  r="3" style="animation-delay:.34s"/>
-          <circle class="nd" cx="292" cy="88"  r="3" style="animation-delay:.38s"/>
-          <circle class="nd" cx="325" cy="118" r="3" style="animation-delay:.42s"/>
-          <circle class="nd" cx="360" cy="60"  r="3" style="animation-delay:.46s"/>
-          <circle class="nd" cx="395" cy="96"  r="3" style="animation-delay:.50s"/>
-          <circle class="nd" cx="430" cy="44"  r="3" style="animation-delay:.54s"/>
-          <circle class="nd" cx="464" cy="78"  r="3" style="animation-delay:.58s"/>
-          <!-- trend line -->
-          <path class="trend" d="M24,130 C100,120 180,105 270,90 C360,74 430,56 510,38 C560,27 600,20 620,16"/>
-          <!-- decision point -->
-          <circle class="decring" cx="620" cy="16" r="6"/>
-          <circle class="dec"     cx="620" cy="16" r="6"/>
-        </svg>
-      </div>
-
-      <ul class="hero-tags" aria-label="Key facts">
-        <li>📍 <span data-en="8 The Green, Suite A, Dover, DE 19901" data-de="8 The Green, Suite A, Dover, DE 19901">8 The Green, Suite A, Dover, DE 19901</span></li>
-        <li>🔒 <span data-en="Zero cookies · zero trackers" data-de="Keine Cookies · kein Tracking">Zero cookies · zero trackers</span></li>
-        <li>🌍 <span data-en="English & German-speaking markets" data-de="EN &amp; DE Märkte">English & German-speaking markets</span></li>
-      </ul>
-    </div>
-
-    <!-- Founder -->
-    <aside class="glass founder-pane" aria-label="Founder">
-      <div>
-        <div class="founder-top">
-          <div class="f-photo" role="img" aria-label="Axel, Founder"></div>
-          <div>
-            <div class="f-name">Axel</div>
-            <div class="f-role" data-en="Founder · Data &amp; Analytics Practitioner" data-de="Gründer · Analytics-Praktiker">Founder · Data &amp; Analytics Practitioner</div>
-          </div>
-        </div>
-        <div class="lang-en" style="margin-top:16px;">
-          <p class="f-quote">"I've been on both sides — inside the brands and inside the agencies. I know what gets built in theory and what actually holds up under production traffic."</p>
-        </div>
-        <div class="lang-de" hidden style="margin-top:16px;">
-          <p class="f-quote">„Ich kenne beide Seiten — von innen als Marke und von innen als Agentur. Ich weiß, was in der Theorie gebaut wird und was unter echtem Produktionsdruck standhält."</p>
-        </div>
-      </div>
-      <div class="f-meta">
-        <div class="lang-en">
-          <b>Background:</b> Agency work and in-house roles across industries from consumer electronics retail to regulated medical devices.<br/><br/>
-          <b>Style:</b> Minimal overhead · maximum signal · no vanity metrics.
-        </div>
-        <div class="lang-de" hidden>
-          <b>Hintergrund:</b> Agentur- und Inhouse-Erfahrung aus Branchen von Elektronikvertrieb bis hin zu regulierten Medizinprodukten.<br/><br/>
-          <b>Stil:</b> Minimaler Overhead · maximales Signal · keine Vanity-Metriken.
-        </div>
-      </div>
-    </aside>
-
-  </div>
-</section>
-
-<!-- ═══ PROBLEM ══════════════════════════════════════════════════ -->
-<section id="problem" class="sxn wrap" aria-label="The Problem">
-  <div class="problem-grid">
-
-    <div class="glass problem-copy reveal">
-      <p class="eyebrow" data-en="Chapter 1" data-de="Kapitel 1">Chapter 1</p>
-      <div class="lang-en">
-        <h2>Most data is just noise.</h2>
-        <p class="sub-p">ScaleUps and agencies sit on gold mines of behavioral data — buried under inconsistent event names, dashboards nobody trusts, and a tracking setup that was done "quickly" three years ago and never revisited.</p>
-        <p class="sub-p" style="margin-top:12px;">The problem isn't the data. It's the system — or the lack of one.</p>
-      </div>
-      <div class="lang-de" hidden>
-        <h2>Die meisten Daten sind nur Rauschen.</h2>
-        <p class="sub-p">ScaleUps und Agenturen sitzen auf Goldminen von Verhaltensdaten — begraben unter inkonsistenten Event-Namen, Dashboards denen niemand traut, und einem Tracking-Setup, das vor drei Jahren „schnell" aufgesetzt wurde und seitdem niemand mehr angefasst hat.</p>
-        <p class="sub-p" style="margin-top:12px;">Das Problem ist nicht das Datenvolumen. Es ist das System — oder das Fehlen eines solchen.</p>
-      </div>
-      <div class="code-block reveal d2" aria-hidden="true">
-        <span class="c-comment">// typical data landscape</span><br/>
-        <span class="c-val">27</span> data sources<br/>
-        <span class="c-val">14</span> <span data-en="naming conventions" data-de="Namenskonventionen">naming conventions</span><br/>
-        <span class="c-val">0 &nbsp;</span> <span data-en="single source of truth" data-de="einheitliche Datenquelle">single source of truth</span>
-      </div>
-    </div>
-
-    <div class="glass problem-vis reveal d1" aria-hidden="true">
-      <p class="eyebrow" data-en="Signal vs. noise" data-de="Signal vs. Rauschen">Signal vs. noise</p>
-      <svg class="chaos-svg" id="chaosSvg" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
-        <line stroke="var(--hairline)" stroke-width="1" x1="0" y1="60"  x2="340" y2="60"/>
-        <line stroke="var(--hairline)" stroke-width="1" x1="0" y1="120" x2="340" y2="120"/>
-        <line stroke="var(--hairline)" stroke-width="1" x1="0" y1="180" x2="340" y2="180"/>
-        <path class="cw cw1" d="M10,80 C40,30 60,150 90,100 C120,50 140,170 170,90 C200,20 220,160 250,80 C280,10 310,130 330,70"/>
-        <path class="cw cw2" d="M10,150 C50,200 70,80 100,160 C130,220 160,60 190,150 C220,220 250,90 280,170 C300,210 320,120 330,160"/>
-        <path class="cw cw3" d="M10,110 C45,60 65,180 95,110 C125,40 145,190 175,120 C205,55 230,175 260,105 C285,45 315,165 330,100"/>
-        <path class="cw cw4" d="M10,190 C40,140 70,220 100,175 C140,120 160,210 200,155 C240,95 265,200 295,145 C315,110 328,185 330,165"/>
+    <div class="glass wave-panel reveal" style="transition-delay:160ms;">
+      <svg id="waveSvg" viewBox="0 0 900 220" aria-hidden="true">
+        <path class="wave-path" id="wave1" stroke="#176B44" opacity="0.28" d="M0,120 C60,60 100,180 160,110 C220,40 260,170 320,90 C380,30 420,160 480,100 C540,50 580,150 640,80 C700,30 740,140 800,90 C830,70 860,110 900,60"></path>
+        <path class="wave-path" id="wave2" stroke="#E2572C" opacity="0.22" d="M0,60 C70,140 110,20 170,100 C230,180 270,40 330,120 C390,190 430,50 490,110 C550,160 590,30 650,90 C710,150 750,50 810,110 C840,140 870,90 900,130"></path>
+        <path class="wave-path" id="wave3" stroke="#176B44" opacity="0.4" d="M0,160 C50,110 90,190 150,140 C210,90 250,180 310,130 C370,80 410,170 470,120 C530,70 570,160 630,110 C690,60 730,150 790,100 C830,75 860,120 900,95"></path>
+        <path class="wave-path" id="wave4" stroke="#3C444A" opacity="0.18" d="M0,100 C80,40 120,150 190,80 C260,10 300,140 370,70 C440,0 480,130 550,70 C620,10 660,120 730,70 C780,35 830,90 900,50"></path>
       </svg>
-      <div class="lang-en" style="margin-top:12px;font-size:12.5px;color:var(--ink-60);line-height:1.55;">Four teams. Four tools. Four definitions of "conversion." This is what most analytics stacks look like before systematic work.</div>
-      <div class="lang-de" hidden style="margin-top:12px;font-size:12.5px;color:var(--ink-60);line-height:1.55;">Vier Teams. Vier Tools. Vier Definitionen von „Conversion." So sehen die meisten Analytics-Stacks aus, bevor systematische Arbeit beginnt.</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══ APPROACH ═════════════════════════════════════════════════ -->
-<section id="approach" class="sxn wrap" aria-label="Approach">
-  <div class="glass diff-panel reveal">
-    <p class="eyebrow" data-en="Chapter 2" data-de="Kapitel 2">Chapter 2</p>
-    <div class="lang-en">
-      <h2>One head beats ten — if you use it right.</h2>
-      <p class="sub-p">A large agency brings you a room full of people — several of whom are there to manage the others. With focused project planning and AI-powered execution, you get the same breadth, the same network depth, and a direct line to the person actually doing the work.</p>
-    </div>
-    <div class="lang-de" hidden>
-      <h2>Ein Kopf schlägt zehn — wenn man ihn richtig einsetzt.</h2>
-      <p class="sub-p">Eine große Agentur bringt dir ein Zimmer voller Menschen — von denen ein Teil damit beschäftigt ist, die anderen zu koordinieren. Mit gezielter Projektplanung und KI-gestützter Umsetzung bekommst du dieselbe Bandbreite, dieselbe Netzwerktiefe — und eine direkte Leitung zur Person, die die Arbeit tatsächlich macht.</p>
-    </div>
-
-    <div class="diff-grid reveal d1">
-      <div class="diff-card">
-        <div class="dc-icon">🎯</div>
-        <div class="lang-en"><h3>Focused delivery</h3><p>No account managers, no handoff chains, no "let me check with the team." You speak directly to the person building your solution.</p></div>
-        <div class="lang-de" hidden><h3>Fokussierte Umsetzung</h3><p>Keine Account Manager, keine Übergabe-Ketten, kein „ich frage mal nach". Du sprichst direkt mit der Person, die deine Lösung baut.</p></div>
-      </div>
-      <div class="diff-card">
-        <div class="dc-icon">🤖</div>
-        <div class="lang-en"><h3>AI-augmented capacity</h3><p>Modern AI tooling closes the capacity gap that once required large teams — without closing the quality gap.</p></div>
-        <div class="lang-de" hidden><h3>KI-gestützte Kapazität</h3><p>Moderne KI-Tools schließen die Kapazitätslücke, die früher große Teams erforderte — ohne dabei die Qualitätslücke zu öffnen.</p></div>
-      </div>
-      <div class="diff-card">
-        <div class="dc-icon">🔗</div>
-        <div class="lang-en"><h3>Vetted partner network</h3><p>When the brief requires more disciplines — Dev, Media, Content, Video — the right specialist enters the project. No bench-warming.</p></div>
-        <div class="lang-de" hidden><h3>Geprüftes Partnernetzwerk</h3><p>Wenn ein Briefing weitere Disziplinen erfordert — Dev, Media, Content, Video — kommt der richtige Spezialist ins Projekt. Keine ungenutzten Ressourcen.</p></div>
-      </div>
-      <div class="diff-card">
-        <div class="dc-icon">📐</div>
-        <div class="lang-en"><h3>Discovery before delivery</h3><p>Every project starts with a structured discovery. Scope is written before work begins. No billing surprises, no scope creep.</p></div>
-        <div class="lang-de" hidden><h3>Discovery vor Delivery</h3><p>Jedes Projekt beginnt mit einer strukturierten Discovery. Scope wird schriftlich festgehalten, bevor die Arbeit beginnt. Keine Kostenüberraschungen.</p></div>
+      <div class="terminal-lines" id="termLines">
+        <div class="term-line mono">// 27 data sources</div>
+        <div class="term-line mono">// 14 different naming conventions</div>
+        <div class="term-line mono">// 0 single source of truth</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PARTNER NETWORK ══════════════════════════════════════════ -->
-<section id="network" class="sxn wrap" aria-label="Partner Network">
-  <div class="glass panel reveal">
-    <p class="eyebrow" data-en="Partner Network" data-de="Partnernetzwerk">Partner Network</p>
-    <div class="lang-en">
-      <h2>The full stack, when you need it.</h2>
-      <p class="sub-p">Some projects need more than one discipline. Behind this practice sits a curated network of vetted specialists — each best-in-class in their domain, brought in exactly when the brief calls for it.</p>
-    </div>
-    <div class="lang-de" hidden>
-      <h2>Das volle Spektrum — wenn du es brauchst.</h2>
-      <p class="sub-p">Manche Projekte brauchen mehr als eine Disziplin. Hinter dieser Praxis steht ein kuratiertes Netzwerk aus geprüften Spezialist:innen — führend in ihrer Domäne, hinzugezogen genau dann, wenn das Briefing es verlangt.</p>
-    </div>
+<!-- ================= CHAPTER 2 — THE PROCESS ================= -->
+<section id="process" data-chapter="The Process">
+  <div class="wrap">
+    <p class="kicker reveal">Chapter Two</p>
+    <h2 class="headline reveal">Structure is the work.</h2>
+    <p class="lede reveal" style="transition-delay:100ms;">Before dashboards. Before insights. Before decisions. There is one job: make the data say the same thing twice. We build that foundation.</p>
 
-    <div class="net-grid">
-      <div class="net-card reveal">
-        <div class="nc-icon">💻</div>
-        <div class="nc-title" data-en="Development" data-de="Development">Development</div>
-        <div class="nc-sub" data-en="Custom integrations, server-side tracking, web &amp; app dev" data-de="Custom-Integrationen, Server-side Tracking, Web &amp; App">Custom integrations, server-side tracking, web &amp; app dev</div>
-      </div>
-      <div class="net-card reveal d1">
-        <div class="nc-icon">📢</div>
-        <div class="nc-title" data-en="Media &amp; Ads" data-de="Media &amp; Ads">Media &amp; Ads</div>
-        <div class="nc-sub" data-en="Paid channels, campaign architecture, performance tracking" data-de="Paid-Kanäle, Kampagnenarchitektur, Performance-Tracking">Paid channels, campaign architecture, performance tracking</div>
-      </div>
-      <div class="net-card reveal d2">
-        <div class="nc-icon">🎬</div>
-        <div class="nc-title" data-en="Video &amp; Photo" data-de="Video &amp; Foto">Video &amp; Photo</div>
-        <div class="nc-sub" data-en="Digital production for campaigns and content channels" data-de="Digitale Produktion für Kampagnen und Content-Kanäle">Digital production for campaigns and content channels</div>
-      </div>
-      <div class="net-card reveal d3">
-        <div class="nc-icon">✍️</div>
-        <div class="nc-title" data-en="Content" data-de="Content">Content</div>
-        <div class="nc-sub" data-en="Copywriting, SEO content, editorial strategy" data-de="Copywriting, SEO-Content, redaktionelle Strategie">Copywriting, SEO content, editorial strategy</div>
-      </div>
-      <div class="net-card reveal d4">
-        <div class="nc-icon">📊</div>
-        <div class="nc-title" data-en="Tracking" data-de="Tracking">Tracking</div>
-        <div class="nc-sub" data-en="Extended QA, specialist validation, consent architecture" data-de="Erweitertes QA, spezialisierte Validierung, Consent-Architektur">Extended QA, specialist validation, consent architecture</div>
-      </div>
-      <div class="net-card reveal d5">
-        <div class="nc-icon">🧭</div>
-        <div class="nc-title" data-en="Strategy" data-de="Strategie">Strategy</div>
-        <div class="nc-sub" data-en="Channel strategy, positioning, analytics consulting" data-de="Kanalstrategie, Positionierung, Analytics-Beratung">Channel strategy, positioning, analytics consulting</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PROCESS ══════════════════════════════════════════════════ -->
-<section id="process" class="sxn wrap" aria-label="Process">
-  <div class="glass panel reveal">
-    <p class="eyebrow" data-en="How it works" data-de="So funktioniert's">How it works</p>
-    <div class="lang-en">
-      <h2>From trigger to plan.</h2>
-      <p class="sub-p">Every engagement starts with a conversation — whether you have a very specific problem or a vague feeling that something isn't working. Both are valid entry points.</p>
-    </div>
-    <div class="lang-de" hidden>
-      <h2>Vom Impuls zum Plan.</h2>
-      <p class="sub-p">Jedes Engagement beginnt mit einem Gespräch — ob du ein konkretes Problem hast oder einfach das Gefühl, dass irgendetwas nicht stimmt. Beides ist ein gültiger Einstieg.</p>
-    </div>
-
-    <div class="process-steps">
-      <div class="ps reveal">
-        <div class="ps-num">01</div>
-        <div class="ps-body">
-          <div class="lang-en">
-            <h3>Initial conversation</h3>
-            <p>What's the trigger? A broken funnel, a new tool, a reporting gap, or a strategic direction you want data to support. Acute pain or long-term ambition — both work.</p>
-            <span class="ps-note">30–60 min · No commitment</span>
+    <div class="process-track">
+      <div class="process-line" id="processLine"><div class="process-line-fill" id="processLineFill"></div></div>
+      <div class="process-steps">
+        <div class="glass process-card reveal">
+          <div>
+            <div class="process-num">01</div>
+            <div class="process-icon">
+              <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="#176B44" opacity="0.5"/><circle cx="22" cy="10" r="3" fill="#176B44" opacity="0.5"/><circle cx="14" cy="22" r="3" fill="#176B44" opacity="0.5"/><circle cx="15" cy="15" r="4" fill="#176B44"/></svg>
+            </div>
           </div>
-          <div class="lang-de" hidden>
-            <h3>Erstgespräch</h3>
-            <p>Was ist der Auslöser? Ein defekter Funnel, ein neues Tool, eine Reporting-Lücke oder eine strategische Richtung, die Daten stützen sollen. Akuter Schmerz oder langfristige Ambition — beides funktioniert.</p>
-            <span class="ps-note">30–60 Min · Unverbindlich</span>
+          <div>
+            <div class="process-title">Collect</div>
+            <div class="process-desc">Everything your systems already emit, brought into one place.</div>
           </div>
         </div>
-      </div>
-      <div class="ps reveal d1">
-        <div class="ps-num">02</div>
-        <div class="ps-body">
-          <div class="lang-en">
-            <h3>Discovery</h3>
-            <p>Map the existing landscape: tools, data flows, team structure, and real problems vs. perceived problems. What's actually broken, and what just feels broken?</p>
-            <span class="ps-note">Days to 1 week</span>
+        <div class="glass process-card reveal" style="transition-delay:120ms;">
+          <div>
+            <div class="process-num">02</div>
+            <div class="process-icon">
+              <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="4" y="4" width="8" height="8" fill="none" stroke="#176B44" stroke-width="2"/><rect x="18" y="4" width="8" height="8" fill="none" stroke="#176B44" stroke-width="2"/><rect x="4" y="18" width="8" height="8" fill="none" stroke="#176B44" stroke-width="2"/><rect x="18" y="18" width="8" height="8" fill="#176B44"/></svg>
+            </div>
           </div>
-          <div class="lang-de" hidden>
-            <h3>Discovery</h3>
-            <p>Bestandsaufnahme der bestehenden Landschaft: Tools, Datenflüsse, Teamstruktur und echte vs. vermutete Probleme. Was ist wirklich kaputt — und was fühlt sich nur so an?</p>
-            <span class="ps-note">Tage bis 1 Woche</span>
+          <div>
+            <div class="process-title">Structure</div>
+            <div class="process-desc">Named consistently. Defined once. Trusted everywhere.</div>
           </div>
         </div>
-      </div>
-      <div class="ps reveal d2">
-        <div class="ps-num">03</div>
-        <div class="ps-body">
-          <div class="lang-en">
-            <h3>Project plan</h3>
-            <p>Scope, timeline, deliverables, and price — in writing, before any work begins. Projects range from days to months depending on complexity.</p>
-            <span class="ps-note">Fixed scope · Written before start</span>
+        <div class="glass process-card reveal" style="transition-delay:240ms;">
+          <div>
+            <div class="process-num">03</div>
+            <div class="process-icon">
+              <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path d="M4 24 L24 4" stroke="#176B44" stroke-width="2.4" stroke-linecap="round"/><path d="M14 4 L24 4 L24 14" stroke="#176B44" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
           </div>
-          <div class="lang-de" hidden>
-            <h3>Projektplan</h3>
-            <p>Scope, Timeline, Deliverables und Preis — schriftlich, bevor die Arbeit beginnt. Projekte dauern je nach Komplexität von Tagen bis Monaten.</p>
-            <span class="ps-note">Fixer Scope · Schriftlich vorab</span>
+          <div>
+            <div class="process-title">Analyze</div>
+            <div class="process-desc">Reduced to the numbers that change what you do next.</div>
           </div>
         </div>
       </div>
@@ -637,83 +449,80 @@ footer{padding:28px 0 44px;margin-top:6px;}
   </div>
 </section>
 
-<!-- ═══ SERVICES ════════════════════════════════════════════════ -->
-<section id="services" class="sxn wrap" aria-label="Services">
-  <div class="glass panel reveal">
-    <p class="eyebrow" data-en="Chapter 3" data-de="Kapitel 3">Chapter 3</p>
-    <div class="lang-en"><h2>What this looks like in practice.</h2></div>
-    <div class="lang-de" hidden><h2>So sieht das in der Praxis aus.</h2></div>
+<!-- ================= CHAPTER 3 — THE OUTCOME ================= -->
+<section id="outcome" data-chapter="The Outcome">
+  <div class="wrap">
+    <p class="kicker reveal">Chapter Three</p>
+    <h2 class="headline reveal">One number. Clear action.</h2>
+    <p class="lede reveal" style="transition-delay:100ms;">The goal was never more data. It was always the one number that makes the next step obvious. That's what we deliver.</p>
 
-    <div class="svc-list">
+    <div class="glass signal-panel reveal" style="transition-delay:160ms;">
+      <svg id="signalSvg" viewBox="0 0 1000 300" aria-hidden="true">
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M40 0 L0 0 0 40" fill="none" stroke="#14181A" stroke-opacity="0.05" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="1000" height="300" fill="url(#grid)"/>
+        <circle class="signal-dot" cx="60" cy="230" r="4"></circle>
+        <circle class="signal-dot" cx="100" cy="90" r="3"></circle>
+        <circle class="signal-dot" cx="140" cy="200" r="5"></circle>
+        <circle class="signal-dot" cx="170" cy="60" r="3"></circle>
+        <circle class="signal-dot" cx="200" cy="250" r="4"></circle>
+        <circle class="signal-dot" cx="230" cy="140" r="3"></circle>
+        <circle class="signal-dot" cx="260" cy="190" r="4"></circle>
+        <circle class="signal-dot" cx="300" cy="80" r="3"></circle>
+        <circle class="signal-dot" cx="330" cy="220" r="4"></circle>
+        <path id="signalPath" class="signal-draw" d="M60,230 C220,160 340,120 480,150 C600,176 700,60 820,60 C880,60 920,60 940,60"></path>
+        <circle id="signalEnd" class="pulse-ring" cx="940" cy="60" r="10"></circle>
+        <circle cx="940" cy="60" r="9" fill="#E2572C"></circle>
+      </svg>
+      <div class="decision-label mono">→ DECISION</div>
+    </div>
+  </div>
+</section>
 
-      <div class="svc reveal">
-        <div class="svc-num">01</div>
+<!-- ================= CHAPTER 4 — SERVICES ================= -->
+<section id="services" data-chapter="Services">
+  <div class="wrap">
+    <p class="kicker reveal">Chapter Four</p>
+    <h2 class="headline reveal">What this looks like in practice.</h2>
+
+    <div class="glass" style="margin-top:48px; padding: 8px 30px;">
+      <div class="service-row reveal">
+        <div class="service-num mono">01</div>
         <div>
-          <div class="lang-en"><h3>Tracking &amp; Instrumentation</h3><p>The foundation. Without reliable data collection, everything downstream — analysis, reporting, decisions — is built on sand.</p></div>
-          <div class="lang-de" hidden><h3>Tracking &amp; Instrumentierung</h3><p>Das Fundament. Ohne zuverlässige Datenerfassung ist alles danach — Analyse, Reporting, Entscheidungen — auf Sand gebaut.</p></div>
-          <div class="svc-tags">
-            <span class="svc-tag">GA4 setup &amp; audit</span>
-            <span class="svc-tag">Google Tag Manager</span>
-            <span class="svc-tag">Consent-aware measurement</span>
-            <span class="svc-tag">Event taxonomy</span>
-            <span class="svc-tag">Server-side tracking</span>
-            <span class="svc-tag">Cross-domain</span>
-            <span class="svc-tag">Debugging &amp; QA</span>
-          </div>
+          <div class="service-title">Tracking &amp; Instrumentation</div>
+          <div class="service-desc">GA4, Tag Manager, consent-aware, event design, debugging.</div>
         </div>
+        <svg class="service-svg" viewBox="0 0 84 46" aria-hidden="true"><circle cx="42" cy="23" r="5" fill="#176B44"/><circle cx="12" cy="10" r="3" fill="#176B44" opacity="0.5"/><circle cx="72" cy="10" r="3" fill="#176B44" opacity="0.5"/><circle cx="12" cy="36" r="3" fill="#176B44" opacity="0.5"/><circle cx="72" cy="36" r="3" fill="#176B44" opacity="0.5"/><path d="M15 11 L38 21 M69 11 L46 21 M15 35 L38 25 M69 35 L46 25" stroke="#176B44" stroke-width="1.2" opacity="0.35"/></svg>
       </div>
-
-      <div class="svc reveal d1">
-        <div class="svc-num">02</div>
+      <div class="service-row reveal" style="transition-delay:100ms;">
+        <div class="service-num mono">02</div>
         <div>
-          <div class="lang-en"><h3>Data Workflows &amp; Automation</h3><p>Connecting the dots between systems. Data that flows automatically — cleaned, transformed, and ready — is data that actually gets used.</p></div>
-          <div class="lang-de" hidden><h3>Data Workflows &amp; Automatisierung</h3><p>Systeme miteinander verbinden. Daten, die automatisch fließen — bereinigt, transformiert und verfügbar — sind Daten, die tatsächlich genutzt werden.</p></div>
-          <div class="svc-tags">
-            <span class="svc-tag">API integrations</span>
-            <span class="svc-tag">Automated pipelines</span>
-            <span class="svc-tag">Google Sheets infrastructure</span>
-            <span class="svc-tag">Apps Script</span>
-            <span class="svc-tag">Data transformation</span>
-            <span class="svc-tag">Trigger-based automation</span>
-            <span class="svc-tag">Make / n8n</span>
-          </div>
+          <div class="service-title">Data Workflows &amp; Automation</div>
+          <div class="service-desc">APIs, Sheets, scripts, pipelines that don't break on Mondays.</div>
         </div>
+        <svg class="service-svg" viewBox="0 0 84 46" aria-hidden="true"><path d="M4 23 C 24 5, 34 41, 54 23 S 74 5, 80 23" fill="none" stroke="#176B44" stroke-width="2.2" stroke-linecap="round"/><circle cx="80" cy="23" r="3" fill="#E2572C"/></svg>
       </div>
-
-      <div class="svc reveal d2">
-        <div class="svc-num">03</div>
+      <div class="service-row reveal" style="transition-delay:200ms;">
+        <div class="service-num mono">03</div>
         <div>
-          <div class="lang-en"><h3>Analysis &amp; Reporting</h3><p>The outcome. Reports built for decisions, not presentations. Dashboards people actually open. Numbers that change what you do next.</p></div>
-          <div class="lang-de" hidden><h3>Analyse &amp; Reporting</h3><p>Das Ergebnis. Reports gebaut für Entscheidungen, nicht für Präsentationen. Dashboards, die tatsächlich geöffnet werden. Zahlen, die das nächste Handeln verändern.</p></div>
-          <div class="svc-tags">
-            <span class="svc-tag">KPI framework design</span>
-            <span class="svc-tag">Looker Studio</span>
-            <span class="svc-tag">BigQuery analysis</span>
-            <span class="svc-tag">Attribution modeling</span>
-            <span class="svc-tag">Cohort &amp; funnel analysis</span>
-            <span class="svc-tag">SQL · Python · R</span>
-            <span class="svc-tag">AI-assisted analysis</span>
-          </div>
+          <div class="service-title">Analysis &amp; Reporting</div>
+          <div class="service-desc">Dashboards for decisions: KPIs, context, trends, next steps.</div>
         </div>
+        <svg class="service-svg" viewBox="0 0 84 46" aria-hidden="true"><line x1="4" y1="38" x2="80" y2="38" stroke="#176B44" stroke-width="1.5" opacity="0.35"/><path d="M4 38 L24 24 L44 30 L80 8" fill="none" stroke="#176B44" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="80" cy="8" r="3.5" fill="#E2572C"/></svg>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══ STACK ════════════════════════════════════════════════════ -->
-<section id="stack" class="sxn wrap" aria-label="Stack">
-  <div class="glass panel reveal">
-    <p class="eyebrow" data-en="Tools &amp; Stack" data-de="Tools &amp; Stack">Tools &amp; Stack</p>
-    <div class="lang-en">
-      <h2>Google-shaped. System-first.</h2>
-      <p class="sub-p">Most of the stack is Google-shaped — because that's where the data already lives. The real discipline is system design: naming things once, measuring them consistently, and building something people actually use long after the project ends.</p>
-    </div>
-    <div class="lang-de" hidden>
-      <h2>Google-geprägt. System-first.</h2>
-      <p class="sub-p">Der Stack ist größtenteils Google-geprägt — weil dort die Daten bereits leben. Die eigentliche Disziplin ist Systemdesign: Dinge einmalig benennen, konsistent messen und etwas bauen, das auch nach Projektende genutzt wird.</p>
-    </div>
-    <div class="chips">
+<!-- ================= CHAPTER 5 — STACK ================= -->
+<section id="stack" data-chapter="Stack">
+  <div class="wrap">
+    <p class="kicker reveal">Chapter Five</p>
+    <h2 class="headline reveal">Google-shaped. System-first.</h2>
+    <div class="chips reveal" style="transition-delay:100ms;">
       <span class="chip">Google Analytics 4</span>
       <span class="chip">Google Tag Manager</span>
       <span class="chip">BigQuery</span>
@@ -721,314 +530,422 @@ footer{padding:28px 0 44px;margin-top:6px;}
       <span class="chip">Google Sheets</span>
       <span class="chip">Apps Script</span>
       <span class="chip">SQL</span>
-      <span class="chip">Python</span>
-      <span class="chip">R</span>
-      <span class="chip">AI &amp; LLM</span>
       <span class="chip">APIs</span>
-      <span class="chip">Make</span>
-      <span class="chip">n8n</span>
-      <span class="chip">Automation workflows</span>
+      <span class="chip">Python / R</span>
+      <span class="chip">AI &amp; LLM</span>
+      <span class="chip">Automation &amp; Workflows</span>
     </div>
+    <p class="stack-note reveal" style="transition-delay:160ms;">The tools are mostly Google-shaped because that's where the data already lives. The real work is system design.</p>
   </div>
 </section>
 
-<!-- ═══ PRICING ══════════════════════════════════════════════════ -->
-<section id="pricing" class="sxn wrap" aria-label="Pricing">
-  <div class="glass panel reveal">
-    <p class="eyebrow" data-en="Pricing (USD)" data-de="Preise (USD)">Pricing (USD)</p>
-    <div class="lang-en"><h2>Three ways to work together.</h2></div>
-    <div class="lang-de" hidden><h2>Drei Wege der Zusammenarbeit.</h2></div>
+<!-- ================= CHAPTER 6 — PRICING ================= -->
+<section id="pricing" data-chapter="Pricing">
+  <div class="wrap">
+    <p class="kicker reveal">Chapter Six</p>
+    <h2 class="headline reveal">Straightforward pricing.</h2>
 
     <div class="pricing-grid">
-      <div class="price-card reveal">
-        <div class="lang-en"><h3>Project-based</h3><p class="price-sub">Fixed scope, clear deliverables. From audits to full implementations. Price is always scoped after discovery — no upfront guesses.</p></div>
-        <div class="lang-de" hidden><h3>Projektbasis</h3><p class="price-sub">Fixer Scope, klare Deliverables. Von Audits bis hin zu vollständigen Implementierungen. Preis wird nach der Discovery definiert — kein Raten vorab.</p></div>
-        <span class="price-tag" data-en="From $750 USD" data-de="Ab 750 USD">From $750 USD</span>
+      <div class="glass price-card reveal">
+        <div class="price-tag mono">Project-based</div>
+        <div class="price-title">Fixed scope</div>
+        <div class="price-value mono">Starts at $750 USD</div>
+        <ul class="price-list">
+          <li>Fixed scope</li>
+          <li>Digital delivery</li>
+        </ul>
       </div>
-      <div class="price-card reveal d1">
-        <div class="lang-en"><h3>Hourly</h3><p class="price-sub">Consulting, troubleshooting, and targeted sessions. Ideal for specific questions, QA, or advisory work alongside your internal team.</p></div>
-        <div class="lang-de" hidden><h3>Stundenbasis</h3><p class="price-sub">Beratung, Fehlerbehebung und gezielte Sessions. Ideal für spezifische Fragen, QA oder Advisory-Arbeit neben deinem internen Team.</p></div>
-        <span class="price-tag" data-en="Hourly (USD) · by appointment" data-de="Stündlich (USD) · nach Vereinbarung">Hourly (USD) · by appointment</span>
+      <div class="glass price-card reveal" style="transition-delay:100ms;">
+        <div class="price-tag mono">Hourly</div>
+        <div class="price-title">By appointment</div>
+        <div class="price-value mono">Available (USD)</div>
+        <ul class="price-list">
+          <li>By appointment</li>
+          <li>Consulting &amp; troubleshooting</li>
+        </ul>
       </div>
-      <div class="price-card reveal d2">
-        <div class="lang-en"><h3>Monthly Retainer</h3><p class="price-sub">Ongoing reporting, monitoring, iteration, and support. For teams who want consistent data quality without hiring a full-time analyst.</p></div>
-        <div class="lang-de" hidden><h3>Monatliches Retainer</h3><p class="price-sub">Laufendes Reporting, Monitoring, Iteration und Support. Für Teams, die konsistente Datenqualität wollen, ohne eine Vollzeitstelle zu besetzen.</p></div>
-        <span class="price-tag" data-en="Monthly (USD) · cancelable" data-de="Monatlich (USD) · kündbar">Monthly (USD) · cancelable</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ POLICIES ═════════════════════════════════════════════════ -->
-<section id="policies" class="sxn wrap" aria-label="Policies">
-  <div class="glass panel reveal">
-    <p class="eyebrow" data-en="Policies" data-de="Richtlinien">Policies</p>
-    <div class="lang-en"><h2>Services only. Kept simple.</h2></div>
-    <div class="lang-de" hidden><h2>Nur Dienstleistungen. Einfach gehalten.</h2></div>
-
-    <div class="pol-grid">
-      <div class="pol-item reveal">
-        <div class="lang-en"><h3>Delivery</h3><p>Digital only — documents, dashboards, configurations, calls. After purchase, scope is confirmed in writing and delivery is scheduled based on availability.</p></div>
-        <div class="lang-de" hidden><h3>Lieferung</h3><p>Ausschließlich digital — Dokumente, Dashboards, Konfigurationen, Gespräche. Nach Beauftragung wird der Scope schriftlich bestätigt und die Lieferung nach Verfügbarkeit geplant.</p></div>
-      </div>
-      <div class="pol-item reveal d1">
-        <div class="lang-en"><h3>Cancellation</h3><p>Before work starts: full cancellation. Retainers: effective at the end of the current billing period unless otherwise agreed in writing.</p></div>
-        <div class="lang-de" hidden><h3>Kündigung</h3><p>Vor Arbeitsbeginn: vollständige Stornierung. Retainer: wirksam zum Ende des laufenden Abrechnungszeitraums, sofern nicht schriftlich anders vereinbart.</p></div>
-      </div>
-      <div class="pol-item reveal d2">
-        <div class="lang-en"><h3>Refunds</h3><p>Work not started: full refund. Work started: fair pro-rata settlement based on delivered work and remaining scope. Contact first — issues are resolved quickly.</p></div>
-        <div class="lang-de" hidden><h3>Erstattungen</h3><p>Arbeit nicht begonnen: vollständige Erstattung. Arbeit begonnen: faire anteilige Abrechnung basierend auf erbrachter Leistung. Erst Kontakt aufnehmen — Probleme werden schnell gelöst.</p></div>
+      <div class="glass price-card reveal" style="transition-delay:200ms;">
+        <div class="price-tag mono">Monthly Retainer</div>
+        <div class="price-title">Ongoing</div>
+        <div class="price-value mono">Ongoing (USD)</div>
+        <ul class="price-list">
+          <li>Cancelable (see Policies)</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CONTACT ══════════════════════════════════════════════════ -->
-<section id="contact" class="sxn wrap" aria-label="Contact">
-  <div class="glass panel reveal">
-    <p class="eyebrow" data-en="Contact" data-de="Kontakt">Contact</p>
-    <div class="lang-en"><h2>Tell me what you're trying to decide.</h2></div>
-    <div class="lang-de" hidden><h2>Sag mir, was du entscheiden möchtest.</h2></div>
+<!-- ================= CHAPTER 7 — POLICIES ================= -->
+<section id="policies" data-chapter="Policies">
+  <div class="wrap">
+    <p class="kicker reveal">Chapter Seven</p>
+    <h2 class="headline reveal">Policies, plainly stated.</h2>
+
+    <div class="glass policy-panel reveal" style="transition-delay:100ms;">
+      <div class="policy-grid">
+        <div>
+          <div class="policy-title">Delivery</div>
+          <div class="policy-text">Digital only (docs, dashboards, calls, config). Scope confirmed in writing.</div>
+        </div>
+        <div>
+          <div class="policy-title">Cancellation</div>
+          <div class="policy-text">Pre-start = full cancellation. Retainers: end of billing period.</div>
+        </div>
+        <div>
+          <div class="policy-title">Refunds</div>
+          <div class="policy-text">Not started = full refund. Started = fair pro-rata. Contact first.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 8 — CONTACT ================= -->
+<section id="contact" data-chapter="Contact">
+  <div class="wrap">
+    <p class="kicker reveal">Chapter Eight</p>
+    <h2 class="headline reveal">Tell me what you're trying to decide.</h2>
 
     <div class="contact-grid">
-
-      <!-- LEFT: contact info -->
-      <div class="contact-copy">
-        <div class="lang-en">
-          <p>This form opens your email client. <b>No backend. No storage. No tracking.</b></p>
-          <p style="margin-top:8px;">Quick start: your goal, what you measure today, and what "success" looks like. If not — also fine.</p>
-        </div>
-        <div class="lang-de" hidden>
-          <p>Dieses Formular öffnet deinen E-Mail-Client. <b>Kein Backend. Keine Datenspeicherung. Kein Tracking.</b></p>
-          <p style="margin-top:8px;">Kurzer Einstieg: dein Ziel, was du heute misst und wie „Erfolg" aussieht. Falls nicht — auch gut.</p>
-        </div>
-
+      <div class="glass contact-panel reveal">
         <div class="contact-item">
-          <span class="kbd" id="emailKbd">info@data-informed-decisions.com</span>
-          <button class="btn btn-sm" onclick="copy('info@data-informed-decisions.com','email')" data-en="📋 Copy email" data-de="📋 E-Mail kopieren">📋 Copy email</button>
-          <a class="btn btn-sm" href="mailto:info@data-informed-decisions.com" data-en="↗ Open email" data-de="↗ E-Mail öffnen">↗ Open email</a>
+          <div class="contact-label mono">Email</div>
+          <div class="contact-value" id="emailText">info@data-informed-decisions.com</div>
+          <div class="copy-row">
+            <button class="copy-btn" type="button" onclick="copyText('info@data-informed-decisions.com','emailStatus')">Copy email</button>
+            <a class="copy-btn" href="mailto:info@data-informed-decisions.com" style="text-decoration:none;">Open email ↗</a>
+          </div>
+          <span class="form-status" id="emailStatus"></span>
         </div>
         <div class="contact-item">
-          <span class="kbd" id="phoneKbd">+1 (716) 296-0224</span>
-          <button class="btn btn-sm" onclick="copy('+1 (716) 296-0224','phone')" data-en="📋 Copy phone" data-de="📋 Tel. kopieren">📋 Copy phone</button>
-          <a class="btn btn-sm" href="tel:+17162960224" data-en="📞 Call" data-de="📞 Anrufen">📞 Call</a>
+          <div class="contact-label mono">Phone</div>
+          <div class="contact-value">+1 (716) 296-0224</div>
+          <div class="copy-row">
+            <button class="copy-btn" type="button" onclick="copyText('+1 (716) 296-0224','phoneStatus')">Copy phone</button>
+            <a class="copy-btn" href="tel:+17162960224" style="text-decoration:none;">Call ↗</a>
+          </div>
+          <span class="form-status" id="phoneStatus"></span>
         </div>
-
-        <div style="margin-top:18px;font-size:13.5px;color:var(--ink-60);line-height:1.75;">
-          <div>📍 8 The Green, Suite A, Dover, DE 19901</div>
-          <div data-en="🕐 Mon–Fri, 9:00–17:00 ET" data-de="🕐 Mo–Fr, 9:00–17:00 ET">🕐 Mon–Fri, 9:00–17:00 ET</div>
-          <div data-en="🌍 English &amp; German spoken" data-de="🌍 Deutsch &amp; Englisch">🌍 English &amp; German spoken</div>
+        <div class="contact-item">
+          <div class="contact-label mono">Address</div>
+          <div class="contact-value">8 The Green, Suite A, Dover, DE 19901</div>
+        </div>
+        <div class="contact-item" style="margin-bottom:0;">
+          <div class="contact-label mono">Hours</div>
+          <div class="contact-value">Mon–Fri, 9:00–17:00 (ET)</div>
         </div>
       </div>
 
-      <!-- RIGHT: form -->
-      <form id="cForm">
-        <input type="hidden" id="fts"/>
-        <div class="row2">
-          <div>
-            <label for="fname" data-en="Name" data-de="Name">Name</label>
-            <input id="fname" name="name" autocomplete="name" maxlength="80" data-placeholder-en="Your name" data-placeholder-de="Dein Name" placeholder="Your name"/>
+      <div class="glass contact-panel reveal" style="transition-delay:120ms;">
+        <form id="contactForm">
+          <input type="hidden" id="formLoadedAt" />
+          <div class="honeypot" aria-hidden="true">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
           </div>
-          <div>
-            <label for="femail"><span data-en="Email (required)" data-de="E-Mail (Pflicht)">Email (required)</span></label>
-            <input id="femail" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="120" data-placeholder-en="you@example.com" data-placeholder-de="du@beispiel.de" placeholder="you@example.com"/>
-            <div class="ferr" id="err_email" aria-live="polite"></div>
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" />
           </div>
-        </div>
-        <div>
-          <label for="ftopic" data-en="Topic" data-de="Thema">Topic</label>
-          <input id="ftopic" name="topic" maxlength="120" data-placeholder-en="Tracking, dashboards, automation…" data-placeholder-de="Tracking, Dashboards, Automatisierung…" placeholder="Tracking, dashboards, automation…"/>
-        </div>
-        <div>
-          <label for="fmsg"><span data-en="Message (required)" data-de="Nachricht (Pflicht)">Message (required)</span></label>
-          <textarea id="fmsg" name="msg" required maxlength="2500" data-placeholder-en="A few lines are enough." data-placeholder-de="Ein paar Zeilen genügen.">
-          </textarea>
-          <div class="ferr" id="err_msg" aria-live="polite"></div>
-        </div>
-        <!-- honeypot -->
-        <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
-          <input type="text" id="fhp" name="hp" tabindex="-1" autocomplete="off"/>
-        </div>
-        <button class="btn btn-p btn-block" id="fBtn" type="submit" data-en="✉️ Send via email client" data-de="✉️ Per E-Mail-Client senden">✉️ Send via email client</button>
-        <p class="hint" data-en="Tip: if nothing happens, your browser blocks mailto:. Use 'Copy email' above." data-de="Tipp: Falls nichts passiert, blockiert dein Browser mailto:. Nutze 'E-Mail kopieren' oben.">Tip: if nothing happens, your browser blocks mailto:. Use "Copy email" above.</p>
-      </form>
-
+          <div class="form-field">
+            <label for="email">Email <span style="opacity:0.6;">(required)</span></label>
+            <input type="email" id="email" name="email" required autocomplete="email" />
+          </div>
+          <div class="form-field">
+            <label for="topic">Topic</label>
+            <input type="text" id="topic" name="topic" placeholder="Tracking, automation, reporting…" />
+          </div>
+          <div class="form-field">
+            <label for="message">Message <span style="opacity:0.6;">(required)</span></label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button class="submit-btn" type="submit">Send message</button>
+          <div class="form-status" id="formStatus"></div>
+          <p class="form-note">This opens your email client with a pre-filled message. No data is stored on a server.</p>
+        </form>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══════════════════════════════════════════════════ -->
 <footer>
-  <div class="wrap foot-row">
-    <div>
-      <div><b>Data Informed Decisions LLC</b></div>
-      <div data-en="8 The Green, Suite A, Dover, DE 19901 · Operating globally" data-de="8 The Green, Suite A, Dover, DE 19901 · Weltweit tätig">8 The Green, Suite A, Dover, DE 19901 · Operating globally</div>
-    </div>
-    <div style="text-align:right;">
-      <div><a class="tl" href="#top" data-en="Back to top" data-de="Nach oben">Back to top</a></div>
-      <div style="margin-top:5px;" data-en="Zero cookies · Zero trackers" data-de="Keine Cookies · kein Tracking">Zero cookies · Zero trackers</div>
-      <div style="margin-top:5px;">
-        <a class="tl" href="#pricing" data-en="Pricing" data-de="Preise">Pricing</a> ·
-        <a class="tl" href="#policies" data-en="Policies" data-de="Richtlinien">Policies</a> ·
-        <a class="tl" href="legal.html" data-en="Legal" data-de="Rechtliches">Legal</a>
-      </div>
+  <div class="footer-wrap">
+    <div class="footer-name">Data Informed Decisions LLC</div>
+    <div>8 The Green, Suite A, Dover, DE 19901 · Global</div>
+    <div>Zero cookies · Zero trackers</div>
+    <div class="footer-links">
+      <a href="#pricing">Pricing</a>
+      <a href="#policies">Policies</a>
+      <a href="legal.html">Legal</a>
+      <a href="datenschutz.html">Datenschutz</a>
     </div>
   </div>
 </footer>
 
-</main><!-- /main -->
-
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-<!-- ═══ SCRIPT ═══════════════════════════════════════════════════ -->
 <script>
-/* ── LANG ─────────────────────────────────────────────────────── */
-function setLang(lang){
-  document.documentElement.lang = lang;
-
-  // simple text nodes with data-en / data-de
-  document.querySelectorAll('[data-en][data-de]').forEach(el => {
-    if(!el.children.length) el.textContent = el.dataset[lang] || el.dataset.en;
-  });
-
-  // placeholder attributes
-  document.querySelectorAll('[data-placeholder-en]').forEach(el => {
-    el.placeholder = lang === 'de'
-      ? (el.dataset.placeholderDe || el.dataset.placeholderEn)
-      : el.dataset.placeholderEn;
-  });
-
-  // HTML blocks (.lang-en / .lang-de)
-  document.querySelectorAll('.lang-en,.lang-de').forEach(el => {
-    el.hidden = !el.classList.contains('lang-' + lang);
-  });
-
-  // toggle button state
-  document.querySelectorAll('[data-lang-btn]').forEach(b => {
-    b.classList.toggle('active', b.dataset.langBtn === lang);
-  });
-
-  try{ localStorage.setItem('did_lang', lang); }catch(e){}
-}
-
-// init from saved preference
 (function(){
-  try{
-    const saved = localStorage.getItem('did_lang');
-    if(saved === 'de') setLang('de');
-  }catch(e){}
-})();
+  "use strict";
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ── SCROLL PROGRESS ──────────────────────────────────────────── */
-const sp = document.getElementById('sp');
-window.addEventListener('scroll', () => {
-  const h = document.documentElement;
-  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-  sp.style.height = Math.min(pct, 100) + '%';
-}, {passive:true});
-
-/* ── INTERSECTION OBSERVER (reveals) ─────────────────────────── */
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
-}, {threshold:.12});
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-/* ── CHAOS SVG TRIGGER ────────────────────────────────────────── */
-const chaosIO = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('chaos-reveal'); chaosIO.unobserve(e.target); }});
-}, {threshold:.2});
-const cSvg = document.getElementById('chaosSvg');
-if(cSvg) chaosIO.observe(cSvg);
-
-/* ── SMOOTH SCROLL ────────────────────────────────────────────── */
-function scrollTo(id){
-  const el = document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-/* ── TOAST ────────────────────────────────────────────────────── */
-const toastEl = document.getElementById('toast');
-let toastT;
-function showToast(msg){
-  toastEl.textContent = msg;
-  toastEl.classList.add('show');
-  clearTimeout(toastT);
-  toastT = setTimeout(() => toastEl.classList.remove('show'), 2000);
-}
-
-/* ── COPY ─────────────────────────────────────────────────────── */
-async function copy(txt, type){
-  const isDE = document.documentElement.lang === 'de';
-  const label = type === 'email'
-    ? (isDE ? 'E-Mail kopiert.' : 'Email copied.')
-    : (isDE ? 'Nummer kopiert.' : 'Phone copied.');
-  try{
-    await navigator.clipboard.writeText(txt);
-    showToast(label);
-  }catch(e){
-    const t = document.createElement('textarea');
-    t.value = txt; document.body.appendChild(t); t.select();
-    document.execCommand('copy'); document.body.removeChild(t);
-    showToast(label);
+  /* ---------- Intersection Observer reveals ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if(reduceMotion){
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
   }
-}
 
-/* ── FORM ─────────────────────────────────────────────────────── */
-const fts = document.getElementById('fts');
-const startTs = Date.now();
-if(fts) fts.value = String(startTs);
+  /* ---------- Chapter 1: draw waves + type lines on view ---------- */
+  var wavePanel = document.querySelector('.wave-panel');
+  if(wavePanel){
+    var waves = wavePanel.querySelectorAll('.wave-path');
+    waves.forEach(function(p){
+      var len = p.getTotalLength();
+      p.style.strokeDasharray = len;
+      p.style.strokeDashoffset = reduceMotion ? 0 : len;
+    });
+    var termLines = wavePanel.querySelectorAll('.term-line');
+    var waveIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          if(!reduceMotion){
+            waves.forEach(function(p, i){
+              p.style.transition = 'stroke-dashoffset 1.6s ' + (i*150) + 'ms ease';
+              p.style.strokeDashoffset = 0;
+            });
+            termLines.forEach(function(l){ l.classList.add('type'); });
+          } else {
+            termLines.forEach(function(l){ l.style.width = '34ch'; l.style.borderRight = 'none'; });
+          }
+          waveIO.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    waveIO.observe(wavePanel);
+  }
 
-function setErr(id, msg){
-  const el = document.getElementById(id);
-  if(!el) return;
-  el.textContent = msg || '';
-  el.classList.toggle('show', Boolean(msg));
-}
-function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  /* ---------- Chapter 2: process connector line fill ---------- */
+  var processTrack = document.querySelector('.process-track');
+  var processFill = document.getElementById('processLineFill');
+  if(processTrack && processFill){
+    var procIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          processFill.style.height = reduceMotion ? '100%' : '100%';
+          procIO.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    procIO.observe(processTrack);
+  }
 
-document.getElementById('cForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const isDE = document.documentElement.lang === 'de';
-  setErr('err_email',''); setErr('err_msg','');
+  /* ---------- Chapter 3: signal path draw ---------- */
+  var signalPanel = document.querySelector('.signal-panel');
+  if(signalPanel){
+    var signalPath = document.getElementById('signalPath');
+    var pulse = document.getElementById('signalEnd');
+    var len2 = signalPath.getTotalLength();
+    signalPath.style.strokeDasharray = len2;
+    signalPath.style.strokeDashoffset = reduceMotion ? 0 : len2;
+    var sigIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          if(!reduceMotion){
+            signalPath.style.transition = 'stroke-dashoffset 1.8s ease';
+            signalPath.style.strokeDashoffset = 0;
+            pulse.classList.add('go');
+          } else {
+            pulse.style.opacity = 0;
+          }
+          sigIO.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    sigIO.observe(signalPanel);
+  }
 
-  const email   = (document.getElementById('femail').value||'').trim();
-  const name    = (document.getElementById('fname').value||'').trim();
-  const topic   = (document.getElementById('ftopic').value||'').trim();
-  const msg     = (document.getElementById('fmsg').value||'').trim();
-  const hp      = (document.getElementById('fhp').value||'').trim();
-  const btn     = document.getElementById('fBtn');
+  /* ---------- Hero dot field ---------- */
+  var heroSvg = document.getElementById('heroDots');
+  if(heroSvg){
+    var N = 60, dots = [], cols = 8, rows = 8, cellW = 500/9, cellH = 500/9;
+    var gridIdx = 0;
+    for(var i=0;i<N;i++){
+      var rx = 30 + Math.random()*440;
+      var ry = 30 + Math.random()*440;
+      var col = gridIdx % cols, row = Math.floor(gridIdx / cols);
+      var tx = cellW*(col+1);
+      var ty = cellH*(row+1);
+      gridIdx++;
+      var op = 0.25 + Math.random()*0.55;
+      var r = 3 + Math.random()*4;
+      var circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      circle.setAttribute('cx', rx);
+      circle.setAttribute('cy', ry);
+      circle.setAttribute('r', r);
+      circle.setAttribute('fill', '#176B44');
+      circle.setAttribute('opacity', op.toFixed(2));
+      circle.classList.add('dot');
+      if(!reduceMotion){
+        circle.classList.add('dot-jitter');
+        circle.style.animationDelay = (Math.random()*3) + 's';
+        circle.style.animationDuration = (2.6 + Math.random()*2) + 's';
+      }
+      circle.dataset.rx = rx; circle.dataset.ry = ry;
+      circle.dataset.tx = tx; circle.dataset.ty = ty;
+      heroSvg.appendChild(circle);
+      dots.push(circle);
+    }
 
-  if(hp){ showToast('Nice try.'); return; }
-  if(Date.now() - startTs < 2500){ showToast(isDE ? 'Bitte kurz warten.' : 'Please try again.'); return; }
-  try{
-    const last = Number(localStorage.getItem('did_last_ts')||'0');
-    if(last && Date.now() - last < 30000){ showToast(isDE ? 'Bitte kurz warten.' : 'Please wait a moment.'); return; }
-  }catch(e){}
+    function updateHeroOrder(){
+      var heroSection = document.getElementById('hero');
+      var rect = heroSection.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var progress = 1 - Math.max(0, Math.min(1, (rect.bottom) / (rect.height + vh)));
+      progress = Math.max(0, Math.min(1, progress * 1.6));
+      dots.forEach(function(d){
+        var rx = parseFloat(d.dataset.rx), ry = parseFloat(d.dataset.ry);
+        var tx = parseFloat(d.dataset.tx), ty = parseFloat(d.dataset.ty);
+        var cx = rx + (tx-rx)*progress;
+        var cy = ry + (ty-ry)*progress;
+        d.setAttribute('cx', cx);
+        d.setAttribute('cy', cy);
+      });
+    }
+    updateHeroOrder();
+    if(!reduceMotion){
+      window.addEventListener('scroll', function(){ requestAnimationFrame(updateHeroOrder); }, { passive: true });
+    }
+  }
 
-  let ok = true;
-  if(!email){ setErr('err_email', isDE ? 'Bitte E-Mail angeben.' : 'Please enter your email.'); ok=false; }
-  else if(!isEmail(email)){ setErr('err_email', isDE ? 'E-Mail sieht falsch aus.' : 'Email looks off — please check.'); ok=false; }
-  if(msg.length < 10){ setErr('err_msg', isDE ? 'Bitte eine kurze Nachricht (min. 10 Zeichen).' : 'Please add a short message (min. 10 chars).'); ok=false; }
-  if(!ok) return;
+  /* ---------- Scroll progress + parallax blobs + chapter indicator ---------- */
+  var progressFill = document.getElementById('progressFill');
+  var blobs = document.querySelectorAll('.blob');
+  var indicator = document.getElementById('chapterIndicator');
+  var chapters = document.querySelectorAll('[data-chapter]');
 
-  const sub   = topic ? `Inquiry — ${topic}` : 'Inquiry — Data Informed Decisions LLC';
-  const body  = [
-    isDE ? 'Hallo,' : 'Hi,', '', msg, '',
-    '—', name ? `Name: ${name}` : null, `Email: ${email}`,
-    'Via: data-informed-decisions.com'
-  ].filter(Boolean).join('\n');
+  function onScroll(){
+    var doc = document.documentElement;
+    var scrollTop = window.scrollY || doc.scrollTop;
+    var height = doc.scrollHeight - window.innerHeight;
+    var pct = height > 0 ? (scrollTop/height)*100 : 0;
+    if(progressFill) progressFill.style.height = pct + '%';
 
-  try{ localStorage.setItem('did_last_ts', String(Date.now())); }catch(ex){}
-  btn.disabled = true;
-  showToast(isDE ? 'E-Mail-Client wird geöffnet…' : 'Opening email client…');
-  window.location.href = `mailto:info@data-informed-decisions.com?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`;
-  setTimeout(() => { btn.disabled = false; }, 1500);
-});
+    if(!reduceMotion){
+      blobs.forEach(function(b){
+        var speed = parseFloat(b.dataset.speed) || 0.1;
+        b.style.transform = 'translate3d(0,' + (scrollTop*speed) + 'px,0)';
+      });
+    }
+  }
+  window.addEventListener('scroll', function(){ requestAnimationFrame(onScroll); }, { passive: true });
+  onScroll();
 
-/* ── expose to inline handlers ─────────────────────────────────── */
-window.setLang   = setLang;
-window.scrollTo  = scrollTo;
-window.copy      = copy;
+  if(chapters.length && indicator){
+    var chapIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          indicator.textContent = entry.target.dataset.chapter;
+          indicator.classList.add('show');
+        }
+      });
+    }, { threshold: 0, rootMargin: '-45% 0px -50% 0px' });
+    chapters.forEach(function(c){ chapIO.observe(c); });
+
+    var heroObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          indicator.textContent = 'Hero';
+          indicator.classList.add('show');
+        }
+      });
+    }, { threshold: 0, rootMargin: '-45% 0px -50% 0px' });
+    var heroEl = document.getElementById('hero');
+    if(heroEl) heroObs.observe(heroEl);
+  }
+
+  /* ---------- Copy buttons ---------- */
+  window.copyText = function(text, statusId){
+    var el = document.getElementById(statusId);
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        if(el){ el.textContent = 'Copied.'; setTimeout(function(){ el.textContent=''; }, 2200); }
+      }).catch(function(){
+        if(el){ el.textContent = 'Could not copy — select manually.'; }
+      });
+    } else if(el){
+      el.textContent = 'Copy not supported in this browser.';
+    }
+  };
+
+  /* ---------- Contact form (mailto, honeypot, timestamp, rate-limit) ---------- */
+  var form = document.getElementById('contactForm');
+  var loadedAtField = document.getElementById('formLoadedAt');
+  var formLoadTime = Date.now();
+  if(loadedAtField) loadedAtField.value = formLoadTime;
+
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var statusEl = document.getElementById('formStatus');
+      var honeypot = document.getElementById('company').value.trim();
+      var elapsed = Date.now() - formLoadTime;
+
+      if(honeypot !== ''){
+        if(statusEl) statusEl.textContent = 'Submission blocked.';
+        return;
+      }
+      if(elapsed < 2500){
+        if(statusEl) statusEl.textContent = 'Please take a moment before sending.';
+        return;
+      }
+
+      try{
+        var lastSubmit = parseInt(localStorage.getItem('did_last_submit') || '0', 10);
+        var now = Date.now();
+        if(now - lastSubmit < 60000){
+          if(statusEl) statusEl.textContent = 'One message at a time — please wait a moment and try again.';
+          return;
+        }
+        localStorage.setItem('did_last_submit', String(now));
+      } catch(err){ /* localStorage unavailable — proceed anyway */ }
+
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var topic = document.getElementById('topic').value.trim();
+      var message = document.getElementById('message').value.trim();
+
+      if(!email || !message){
+        if(statusEl) statusEl.textContent = 'Email and message are required.';
+        return;
+      }
+
+      var subject = 'Inquiry' + (topic ? (': ' + topic) : '') + (name ? (' — ' + name) : '');
+      var bodyLines = [
+        name ? ('Name: ' + name) : null,
+        'Email: ' + email,
+        topic ? ('Topic: ' + topic) : null,
+        '',
+        message
+      ].filter(Boolean);
+      var mailto = 'mailto:info@data-informed-decisions.com'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+
+      window.location.href = mailto;
+      if(statusEl) statusEl.textContent = 'Opening your email client…';
+    });
+  }
+})();
 </script>
+
 </body>
 </html>
