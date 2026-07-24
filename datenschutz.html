@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Datenschutzerklärung | Data Informed Decisions LLC &amp; langsi</title>
+<meta name="description" content="Datenschutzerklärung für data-informed-decisions.com und die App langsi (Web &amp; Mobile) der Data Informed Decisions LLC." />
+<link rel="icon" href="https://data-informed-decisions.com/logo_did.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg-1: #EEEEF3;
+    --bg-2: #F2F5EE;
+    --paper: #F4F4F1;
+    --ink: #14181A;
+    --ink-soft: #3C444A;
+    --muted: #616B72;
+    --forest: #176B44;
+    --forest-soft: #E4F0EA;
+    --coral: #E2572C;
+    --glass-bg: rgba(255,255,255,0.6);
+    --glass-bg-strong: rgba(255,255,255,0.7);
+    --glass-border: rgba(255,255,255,0.7);
+    --line: rgba(20,24,26,0.10);
+    --shadow: 0 30px 80px -30px rgba(20,40,32,0.24), 0 8px 24px -12px rgba(20,40,32,0.10);
+    --radius-xl: 30px;
+    --font-head: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin: 0;
+    background: linear-gradient(155deg, var(--bg-1) 0%, var(--bg-2) 55%, var(--paper) 100%);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{ font-family: var(--font-head); letter-spacing: -0.02em; margin: 0; }
+  .mono{ font-family: var(--font-mono); }
+  .blob-field{ position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+  .blob{ position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.5; }
+  .blob-a{ width: 520px; height: 520px; background: #A9E4CF; top: -160px; left: -140px; }
+  .blob-b{ width: 460px; height: 460px; background: #F3B7A2; top: 60vh; right: -160px; }
+  .blob-c{ width: 460px; height: 460px; background: #86C4D4; top: 140vh; left: -180px; }
+
+  .topbar{ position: sticky; top: 0; z-index: 10; padding: 18px 24px; display: flex; justify-content: center; }
+  .topbar-inner{
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    max-width: 900px; width: 100%;
+    background: var(--glass-bg-strong); border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
+    border-radius: 999px; padding: 10px 18px; box-shadow: var(--shadow);
+  }
+  .topbar-logo{ display: flex; align-items: center; gap: 8px; font-family: var(--font-head); font-weight: 600; font-size: 15px; }
+  .topbar-logo img{ height: 24px; width: 24px; object-fit: contain; border-radius: 6px; }
+  .back-link{ text-decoration: none; color: var(--forest); font-size: 13.5px; font-weight: 600; }
+
+  main{ position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 60px 24px 100px; }
+  .page-head{ margin-bottom: 40px; }
+  .kicker{ font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--forest); margin-bottom: 14px; display:block; }
+  h1{ font-size: clamp(28px, 4.6vw, 42px); }
+  .updated{ margin-top: 10px; color: var(--muted); font-size: 13.5px; }
+  .scope-note{
+    margin-top: 18px; font-size: 14px; color: var(--ink-soft);
+    background: var(--forest-soft); border: 1px solid rgba(23,107,68,0.16);
+    border-radius: 14px; padding: 14px 18px;
+  }
+
+  .toc{
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
+    border-radius: var(--radius-xl); box-shadow: var(--shadow);
+    padding: 30px 34px; margin-bottom: 26px;
+  }
+  .toc h2{ font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 14px; }
+  .toc ol{ margin: 0; padding-left: 20px; columns: 2; column-gap: 28px; font-size: 14px; color: var(--ink-soft); }
+  .toc li{ margin-bottom: 8px; break-inside: avoid; }
+  .toc a{ text-decoration: none; color: var(--ink-soft); }
+  .toc a:hover{ color: var(--forest); }
+  @media (max-width: 620px){ .toc ol{ columns: 1; } }
+
+  .panel{
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(26px) saturate(180%); backdrop-filter: blur(26px) saturate(180%);
+    border-radius: var(--radius-xl); box-shadow: var(--shadow);
+    padding: 38px 40px; margin-bottom: 26px; scroll-margin-top: 100px;
+  }
+  .panel h2{ font-size: 21px; font-weight: 600; margin-bottom: 14px; color: var(--forest); }
+  .panel h3{ font-size: 16px; font-weight: 600; margin: 22px 0 8px; color: var(--ink); }
+  .panel h3:first-of-type{ margin-top: 4px; }
+  .panel p{ color: var(--ink-soft); font-size: 15px; margin: 0 0 12px; }
+  .panel p:last-child{ margin-bottom: 0; }
+  .panel ul{ margin: 0 0 12px; padding-left: 20px; color: var(--ink-soft); font-size: 15px; }
+  .panel li{ margin-bottom: 6px; }
+  .contact-block{ font-size: 15px; color: var(--ink-soft); }
+  .contact-block b{ color: var(--ink); }
+  .badge{
+    display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--forest); background: var(--forest-soft);
+    border-radius: 999px; padding: 3px 10px; margin-bottom: 10px;
+  }
+
+  table.processors{ width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 10px 0 16px; }
+  table.processors th{
+    text-align: left; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--muted); padding: 8px 10px; border-bottom: 1px solid var(--line);
+  }
+  table.processors td{ padding: 10px 10px; border-bottom: 1px solid var(--line); color: var(--ink-soft); vertical-align: top; }
+  table.processors tr:last-child td{ border-bottom: none; }
+  table.processors b{ color: var(--ink); }
+
+  footer{ padding: 40px 24px 50px; text-align: center; color: var(--muted); font-size: 13px; position: relative; z-index: 1; }
+</style>
+</head>
+<body>
+
+<div class="blob-field" aria-hidden="true">
+  <div class="blob blob-a"></div>
+  <div class="blob blob-b"></div>
+  <div class="blob blob-c"></div>
+</div>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-logo">
+      <img src="https://data-informed-decisions.com/logo_did.png" alt="Logo Data Informed Decisions LLC" />
+      DID LLC
+    </div>
+    <a class="back-link" href="index.html">← Zurück zur Website</a>
+  </div>
+</div>
+
+<main>
+  <div class="page-head">
+    <span class="kicker">Datenschutz</span>
+    <h1>Datenschutzerklärung</h1>
+    <p class="updated">Stand: 24. Juli 2026</p>
+    <p class="scope-note">Diese Erklärung gilt für die Website <b>data-informed-decisions.com</b> und für alle Apps und Web-Anwendungen, die von der Data Informed Decisions LLC veröffentlicht werden — aktuell <b>langsi</b> (App &amp; Web unter langsi.app). Sie ersetzt Abschnitt 5 der <a href="legal.html" style="color:var(--forest);">Terms &amp; Privacy</a>-Seite in vollem Umfang.</p>
+  </div>
+
+  <nav class="toc" aria-label="Inhaltsverzeichnis">
+    <h2>Inhalt</h2>
+    <ol>
+      <li><a href="#verantwortlicher">Verantwortlicher</a></li>
+      <li><a href="#geltungsbereich">Geltungsbereich</a></li>
+      <li><a href="#grundsaetze">Grundsätze &amp; Rechtsgrundlagen</a></li>
+      <li><a href="#website">Datenschutz auf der Website</a></li>
+      <li><a href="#langsi">Datenschutz in der App langsi</a></li>
+      <li><a href="#empfaenger">Empfänger &amp; Auftragsverarbeiter</a></li>
+      <li><a href="#transfer">Internationale Datenübermittlung</a></li>
+      <li><a href="#cookies">Cookies &amp; Einwilligung</a></li>
+      <li><a href="#speicherdauer">Speicherdauer &amp; Löschung</a></li>
+      <li><a href="#kinder">Kinder &amp; Jugendliche</a></li>
+      <li><a href="#sicherheit">Datensicherheit</a></li>
+      <li><a href="#rechte">Ihre Rechte</a></li>
+      <li><a href="#aenderungen">Änderungen dieser Erklärung</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ol>
+  </nav>
+
+  <div class="panel" id="verantwortlicher">
+    <h2>1. Verantwortlicher</h2>
+    <p>Verantwortlich für die Datenverarbeitung im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer anwendbarer Datenschutzgesetze ist:</p>
+    <div class="contact-block">
+      <p><b>Data Informed Decisions LLC</b><br />
+      8 The Green, Suite A, Dover, DE 19901, USA<br />
+      E-Mail: info@data-informed-decisions.com<br />
+      Telefon: +1 (716) 296-0224<br />
+      Erreichbarkeit: Mo–Fr, 9:00–17:00 (ET)</p>
+    </div>
+    <p>Für alle Datenschutzanfragen — egal ob zur Website oder zu langsi — ist die oben genannte E-Mail-Adresse die zentrale Anlaufstelle.</p>
+  </div>
+
+  <div class="panel" id="geltungsbereich">
+    <h2>2. Geltungsbereich</h2>
+    <p>Diese Datenschutzerklärung beschreibt, wie die Data Informed Decisions LLC personenbezogene Daten verarbeitet:</p>
+    <ul>
+      <li><b>Auf der Unternehmenswebsite</b> data-informed-decisions.com (Kontaktaufnahme, Anfragen).</li>
+      <li><b>In der App langsi</b> — sowohl in der mobilen App (iOS/Android) als auch in der begleitenden Web-Anwendung unter langsi.app.</li>
+    </ul>
+    <p>Wir veröffentlichen künftig ggf. weitere Apps unter der Data Informed Decisions LLC. Sobald eine weitere App live geht, wird diese Erklärung um einen entsprechenden Abschnitt ergänzt und das Datum "Stand" oben aktualisiert.</p>
+  </div>
+
+  <div class="panel" id="grundsaetze">
+    <h2>3. Grundsätze &amp; Rechtsgrundlagen</h2>
+    <p>Wir verarbeiten personenbezogene Daten nur, soweit dies gesetzlich erlaubt ist. Rechtsgrundlagen sind insbesondere:</p>
+    <ul>
+      <li><b>Art. 6 Abs. 1 lit. b DSGVO</b> — Verarbeitung zur Erfüllung eines Vertrags bzw. zur Durchführung vorvertraglicher Maßnahmen (z. B. Kontoeröffnung in langsi, Abwicklung eines Abonnements).</li>
+      <li><b>Art. 6 Abs. 1 lit. a DSGVO</b> — Einwilligung (z. B. Analyse-Cookies, optionale Push-Benachrichtigungen).</li>
+      <li><b>Art. 6 Abs. 1 lit. f DSGVO</b> — berechtigtes Interesse (z. B. Absicherung des Betriebs, Betrugsprävention, Fehleranalyse via Crash- und Nutzungsdaten).</li>
+      <li><b>Art. 6 Abs. 1 lit. c DSGVO</b> — Erfüllung rechtlicher Pflichten (z. B. steuerrechtliche Aufbewahrungsfristen bei Zahlungsdaten).</li>
+    </ul>
+  </div>
+
+  <div class="panel" id="website">
+    <h2>4. Datenschutz auf der Website data-informed-decisions.com</h2>
+    <h3>4.1 Hosting</h3>
+    <p>Die Website wird statisch über GitHub Pages ausgeliefert. Beim Aufruf verarbeitet der Hosting-Anbieter technisch notwendige Server-Logdaten (z. B. IP-Adresse, Zeitstempel, angeforderte Datei), die außerhalb unseres Einflussbereichs kurzzeitig zu Sicherheits- und Betriebszwecken anfallen können.</p>
+    <h3>4.2 Keine Cookies, keine Tracker</h3>
+    <p>Die Unternehmenswebsite selbst setzt keine Cookies, keine Analyse-Skripte und keine Werbe-Tracker ein.</p>
+    <h3>4.3 Kontaktformular</h3>
+    <p>Das Kontaktformular öffnet Ihr eigenes E-Mail-Programm (mailto) mit vorausgefülltem Betreff und Text. Ihre Eingaben werden dabei nicht an einen Server der Data Informed Decisions LLC übertragen oder dort gespeichert — sie verlassen erst mit dem Versand Ihres E-Mail-Programms Ihr Gerät.</p>
+  </div>
+
+  <div class="panel" id="langsi">
+    <h2>5. Datenschutz in der App langsi</h2>
+    <p>langsi ist die erste App der Data Informed Decisions LLC und über die Domain <b>langsi.app</b> sowie als native/Cross-Platform-App für iOS und Android verfügbar. Die folgenden Abschnitte beschreiben umfänglich, welche Daten dabei verarbeitet werden.</p>
+
+    <h3>5.1 Registrierung &amp; Konto</h3>
+    <span class="badge">Art. 6 (1) b DSGVO</span>
+    <p>Bei der Registrierung erheben wir Konto- und Profildaten wie Name, E-Mail-Adresse und Passwort. Passwörter werden ausschließlich gehasht gespeichert, niemals im Klartext. Optional können Sie ein Profilbild hinterlegen.</p>
+
+    <h3>5.2 Login über Drittanbieter (Social Login)</h3>
+    <span class="badge">Art. 6 (1) b DSGVO</span>
+    <p>Neben E-Mail/Passwort bieten wir Login-Buttons für Google, Microsoft, Facebook und Apple an. Die Anmeldung erfolgt technisch über unseren Plattform-Anbieter Base44 als Identity-Broker (server-seitiges OAuth) — es wird keine native SDK-Einbindung dieser Anbieter direkt in der App verwendet. Bei Nutzung eines dieser Logins erhalten wir von dem jeweiligen Anbieter grundlegende Profildaten (z. B. Name, E-Mail-Adresse, Profilbild), soweit Sie dies bei diesem Anbieter freigegeben haben. Es gelten zusätzlich die Datenschutzbestimmungen des jeweils gewählten Anbieters (Google, Microsoft, Meta/Facebook, Apple).</p>
+
+    <h3>5.3 Nutzungs- und Gerätedaten</h3>
+    <span class="badge">Art. 6 (1) f DSGVO</span>
+    <p>Zur Bereitstellung, Absicherung und Fehleranalyse der App verarbeiten wir technische Daten wie Gerätetyp, Betriebssystem-Version, IP-Adresse, App-Ereignisse (z. B. genutzte Funktionen) und Absturz-/Fehlerprotokolle (Crash-Logs).</p>
+
+    <h3>5.4 Zahlungsdaten</h3>
+    <span class="badge">Art. 6 (1) b, c DSGVO</span>
+    <p>Kostenpflichtige Funktionen (Abonnements) werden über den Zahlungsdienstleister Stripe abgewickelt (Checkout, Kunden-Portal, Abo-Verwaltung). Wir speichern selbst keine vollständigen Zahlungsdaten (z. B. Kreditkartennummern) — diese werden ausschließlich von Stripe verarbeitet. In unserem Backend wird lediglich eine Kunden-Referenz-ID (stripe_customer_id) zur Zuordnung des Abonnements gespeichert.</p>
+
+    <h3>5.5 Push-Benachrichtigungen</h3>
+    <span class="badge">Art. 6 (1) a, f DSGVO</span>
+    <p>Sofern Sie Push-Benachrichtigungen aktivieren, wird über Firebase Cloud Messaging (Google) ein Geräte-Token erzeugt und an unsere Backend-Funktionen übermittelt, um Ihnen Benachrichtigungen zusenden zu können. Sie können Push-Benachrichtigungen jederzeit in den Geräte- bzw. App-Einstellungen deaktivieren.</p>
+
+    <h3>5.6 KI-gestützte Funktionen</h3>
+    <span class="badge">Art. 6 (1) b, f DSGVO</span>
+    <p>Bestimmte Funktionen von langsi (z. B. Vokabel-Generierung, Erklärungen, Bilderzeugung) nutzen KI-Sprachmodelle. Hierfür werden von Ihnen eingegebene Inhalte an die Anbieter OpenAI und Anthropic sowie an von Base44 verwaltete Modell-Integrationen übermittelt und dort verarbeitet, um die jeweilige Funktion bereitzustellen. Bitte geben Sie in diesen Funktionen keine besonders sensiblen personenbezogenen Daten Dritter ein, die über den Zweck der Anfrage hinausgehen.</p>
+
+    <h3>5.7 Transaktions-E-Mails</h3>
+    <span class="badge">Art. 6 (1) b DSGVO</span>
+    <p>Systemseitige E-Mails (z. B. Willkommens-E-Mail, Rechnungen, Konto-Benachrichtigungen) werden über den E-Mail-Dienstleister Resend versendet.</p>
+
+    <h3>5.8 Reichweitenmessung (Google Analytics 4)</h3>
+    <span class="badge">Art. 6 (1) a DSGVO — nur mit Einwilligung</span>
+    <p>Auf langsi.app setzen wir Google Analytics 4 (Google LLC) zur statistischen Auswertung der Nutzung ein. Das zugehörige Skript (gtag.js) lädt erst, nachdem Sie über unser Cookie-Consent-Banner ausdrücklich eingewilligt haben. Ohne Einwilligung findet keine Analyse-Datenverarbeitung statt. Details siehe Abschnitt 8, „Cookies &amp; Einwilligung".</p>
+
+    <h3>5.9 CRM (interne Nutzung)</h3>
+    <span class="badge">Art. 6 (1) f DSGVO</span>
+    <p>Wir nutzen HubSpot als Kunden-Beziehungs-Management-System (CRM) für interne Zwecke, etwa zur Verwaltung von Kontakt- und Support-Anfragen. HubSpot ist eingerichtet, wird derzeit aber nur in eingeschränktem Umfang (intern, administrativ) verwendet. Wir weisen es hier vorsorglich vollständig aus, da die technische Berechtigung zur Datenübertragung besteht.</p>
+  </div>
+
+  <div class="panel" id="empfaenger">
+    <h2>6. Empfänger &amp; Auftragsverarbeiter im Überblick</h2>
+    <p>Die folgende Tabelle listet alle Dienstleister, an die im Rahmen von langsi personenbezogene Daten übermittelt werden können, sowie deren Rolle:</p>
+    <table class="processors">
+      <thead>
+        <tr><th>Anbieter</th><th>Rolle</th><th>Verarbeitete Daten</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>Base44 Inc.</b></td><td>Hosting, Backend, Datenbank, Auth-Broker, verwaltete LLM-/Bild-Integration</td><td>Alle App-Daten (Konto-, Nutzungs-, Zahlungs-Referenzdaten)</td></tr>
+        <tr><td><b>Google LLC</b></td><td>Social Login (Google), Firebase Cloud Messaging (Push), Google Analytics 4</td><td>Login-Profildaten, Geräte-Token, Nutzungsstatistiken (nur mit Einwilligung)</td></tr>
+        <tr><td><b>Microsoft Corporation</b></td><td>Social Login (Microsoft)</td><td>Login-Profildaten</td></tr>
+        <tr><td><b>Meta Platforms, Inc.</b></td><td>Social Login (Facebook)</td><td>Login-Profildaten</td></tr>
+        <tr><td><b>Apple Inc.</b></td><td>Social Login (Apple)</td><td>Login-Profildaten</td></tr>
+        <tr><td><b>Stripe, Inc.</b></td><td>Zahlungsabwicklung, Abonnements, Kunden-Portal</td><td>Zahlungs- und Rechnungsdaten</td></tr>
+        <tr><td><b>OpenAI, L.L.C.</b></td><td>KI-Funktionen (Textgenerierung)</td><td>Von Ihnen eingegebene Inhalte in KI-Funktionen</td></tr>
+        <tr><td><b>Anthropic, PBC</b></td><td>KI-Funktionen (Textgenerierung)</td><td>Von Ihnen eingegebene Inhalte in KI-Funktionen</td></tr>
+        <tr><td><b>Resend</b></td><td>Versand von Transaktions-E-Mails</td><td>E-Mail-Adresse, E-Mail-Inhalt (System-E-Mails)</td></tr>
+        <tr><td><b>HubSpot, Inc.</b></td><td>CRM (interne Verwaltung)</td><td>Kontakt- und Anfragedaten</td></tr>
+      </tbody>
+    </table>
+    <p>Mit allen Anbietern, die als Auftragsverarbeiter tätig werden, bestehen bzw. gelten die jeweils erforderlichen Vereinbarungen zur Auftragsverarbeitung (Art. 28 DSGVO) oder die entsprechenden Standardvertragsbedingungen des Anbieters.</p>
+  </div>
+
+  <div class="panel" id="transfer">
+    <h2>7. Internationale Datenübermittlung</h2>
+    <p>Ein Großteil der in Abschnitt 6 genannten Anbieter hat seinen Sitz in den USA. Bei der Nutzung dieser Dienste kann es zu einer Übermittlung personenbezogener Daten in die USA bzw. in andere Drittländer außerhalb der EU/des EWR kommen.</p>
+    <p>Wir stützen solche Übermittlungen, soweit anwendbar, auf:</p>
+    <ul>
+      <li>Beschlüsse zur Angemessenheit des Datenschutzniveaus (z. B. EU-U.S. Data Privacy Framework, sofern der jeweilige Anbieter zertifiziert ist),</li>
+      <li>EU-Standardvertragsklauseln (Standard Contractual Clauses, SCC) nach Art. 46 DSGVO, oder</li>
+      <li>Ihre ausdrückliche Einwilligung, sofern die Verarbeitung einwilligungsbasiert erfolgt (z. B. Google Analytics 4).</li>
+    </ul>
+    <p>Eine Liste der aktuell genutzten Anbieter mit Sitz außerhalb der EU/des EWR finden Sie in der Tabelle in Abschnitt 6. Auf Anfrage teilen wir Ihnen mit, auf welcher konkreten Rechtsgrundlage die Übermittlung an einen bestimmten Anbieter erfolgt.</p>
+  </div>
+
+  <div class="panel" id="cookies">
+    <h2>8. Cookies &amp; Einwilligung</h2>
+    <p>Die Unternehmenswebsite data-informed-decisions.com verwendet keine Cookies.</p>
+    <p>Auf langsi.app werden technisch notwendige Cookies (z. B. zur Aufrechterhaltung Ihrer Anmeldesitzung) sowie — nach Ihrer ausdrücklichen Einwilligung über unser Cookie-Consent-Banner — Analyse-Cookies von Google Analytics 4 eingesetzt. Ohne Einwilligung bleibt Google Analytics deaktiviert; das zugehörige Skript wird technisch erst nach Zustimmung nachgeladen. Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, indem Sie Ihre Cookie-Einstellungen in langsi.app anpassen oder uns kontaktieren.</p>
+  </div>
+
+  <div class="panel" id="speicherdauer">
+    <h2>9. Speicherdauer &amp; Löschung</h2>
+    <p>Wir speichern personenbezogene Daten nur so lange, wie es für die jeweiligen Zwecke erforderlich ist oder gesetzliche Aufbewahrungsfristen (insbesondere handels- und steuerrechtlicher Art bei Zahlungsdaten) dies verlangen.</p>
+    <ul>
+      <li><b>Kontolöschung:</b> Eine Selbstlöschung des Kontos in der App ist aktuell nicht verfügbar. Wenn Sie Ihr langsi-Konto und die damit verbundenen Daten löschen möchten, kontaktieren Sie uns unter info@data-informed-decisions.com. Wir bearbeiten Löschanfragen zeitnah, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</li>
+      <li><b>Zahlungsdaten:</b> Rechnungs- und abrechnungsrelevante Daten werden entsprechend der gesetzlichen Aufbewahrungsfristen (i. d. R. mehrere Jahre) auch nach einer Kontolöschung vorgehalten.</li>
+      <li><b>Nutzungs- und Geräte-Logs:</b> Werden in der Regel nur für einen begrenzten Zeitraum zu Sicherheits- und Fehleranalysezwecken vorgehalten und danach automatisch gelöscht oder anonymisiert.</li>
+    </ul>
+    <p>Wir arbeiten daran, künftig eine Selbstlöschfunktion direkt in den App-Einstellungen anzubieten. Diese Erklärung wird zu gegebener Zeit entsprechend aktualisiert.</p>
+  </div>
+
+  <div class="panel" id="kinder">
+    <h2>10. Kinder &amp; Jugendliche</h2>
+    <p>langsi richtet sich in erster Linie an Nutzer:innen ab 16 Jahren. Nutzer:innen unter 16 Jahren sollten langsi nur mit Zustimmung eines Elternteils oder Erziehungsberechtigten verwenden (Art. 8 DSGVO). Aktuell verfügt die App über keine technische Altersverifikation oder ein automatisiertes Einholen der elterlichen Einwilligung — Eltern und Erziehungsberechtigte werden daher gebeten, die Nutzung durch minderjährige Kinder aktiv zu begleiten.</p>
+    <p>Sollten wir Kenntnis davon erlangen, dass personenbezogene Daten eines Kindes ohne die erforderliche elterliche Einwilligung erhoben wurden, werden wir diese Daten unverzüglich löschen. Eltern und Erziehungsberechtigte, die eine Löschung veranlassen möchten, können sich jederzeit an info@data-informed-decisions.com wenden.</p>
+  </div>
+
+  <div class="panel" id="sicherheit">
+    <h2>11. Datensicherheit</h2>
+    <p>Wir setzen technische und organisatorische Maßnahmen ein, um Ihre Daten gegen Verlust, Missbrauch und unbefugten Zugriff zu schützen — unter anderem Verschlüsselung der Datenübertragung (TLS/HTTPS), gehashte Passwortspeicherung und Zugriffsbeschränkungen auf Backend-Systeme. Unser Hosting- und Backend-Anbieter Base44 stellt die zugrunde liegende Infrastruktur- und Datenbanksicherheit bereit. Ein hundertprozentiger Schutz gegen jede Form von Zugriff ist technisch nicht garantierbar; wir passen unsere Maßnahmen kontinuierlich an den Stand der Technik an.</p>
+  </div>
+
+  <div class="panel" id="rechte">
+    <h2>12. Ihre Rechte</h2>
+    <p>Ihnen stehen nach der DSGVO insbesondere folgende Rechte zu:</p>
+    <ul>
+      <li><b>Auskunft</b> (Art. 15 DSGVO) über die von uns verarbeiteten Daten,</li>
+      <li><b>Berichtigung</b> (Art. 16 DSGVO) unrichtiger Daten,</li>
+      <li><b>Löschung</b> (Art. 17 DSGVO), soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen,</li>
+      <li><b>Einschränkung der Verarbeitung</b> (Art. 18 DSGVO),</li>
+      <li><b>Datenübertragbarkeit</b> (Art. 20 DSGVO),</li>
+      <li><b>Widerspruch</b> gegen Verarbeitungen auf Grundlage berechtigten Interesses (Art. 21 DSGVO),</li>
+      <li><b>Widerruf einer erteilten Einwilligung</b> mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO), z. B. für Google Analytics 4,</li>
+      <li><b>Beschwerde bei einer Aufsichtsbehörde</b> (Art. 77 DSGVO) — insbesondere bei der für Ihren Wohnort zuständigen Datenschutzaufsichtsbehörde in der EU.</li>
+    </ul>
+    <p>Zur Ausübung dieser Rechte genügt eine formlose E-Mail an info@data-informed-decisions.com.</p>
+  </div>
+
+  <div class="panel" id="aenderungen">
+    <h2>13. Änderungen dieser Erklärung</h2>
+    <p>Wir passen diese Datenschutzerklärung an, sobald sich unsere Datenverarbeitung ändert — etwa bei neuen Funktionen in langsi, neuen Dienstleistern oder der Veröffentlichung weiterer Apps. Das Datum "Stand" am Seitenanfang zeigt die letzte Aktualisierung. Es lohnt sich, diese Seite gelegentlich erneut zu prüfen.</p>
+  </div>
+
+  <div class="panel" id="kontakt">
+    <h2>14. Kontakt für Datenschutzanfragen</h2>
+    <div class="contact-block">
+      <p><b>Data Informed Decisions LLC</b><br />
+      8 The Green, Suite A, Dover, DE 19901, USA<br />
+      E-Mail: info@data-informed-decisions.com<br />
+      Telefon: +1 (716) 296-0224<br />
+      Erreichbarkeit: Mo–Fr, 9:00–17:00 (ET)</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Data Informed Decisions LLC · 8 The Green, Suite A, Dover, DE 19901 · <a href="index.html" style="color:var(--forest); text-decoration:none;">Zurück zur Website</a>
+</footer>
+
+</body>
+</html>
